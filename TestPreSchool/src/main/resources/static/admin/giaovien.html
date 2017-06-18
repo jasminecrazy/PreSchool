@@ -1,0 +1,469 @@
+<div class="">
+	<div class="page-title">
+		<div class="title_left">
+			<h3>Quản lí giáo viên</h3>
+		</div>
+
+		<div class="title_right">
+			<div class="form-group pull-right top_search">
+				<button data-toggle="modal" data-target="#myModal_them"
+					type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Thêm</button>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<div class="clearfix"></div>
+				</div>
+				<div class="col-md-6 pull-right">
+					<input id="filter" type="text" placeholder="Filter"
+						class="form-control" data-ng-model="filterTable"></input>
+				</div>
+
+				<div class="x_content">
+
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th style="width: 3%">&#35;</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'teacherId';sortReverse = !sortReverse">Mã
+										giáo viên <span
+										ng-show="sortType == 'teacherId' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'teacherId' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 7%"
+										ng-click="sortType = 'teacherName';sortReverse = !sortReverse">Tên
+										<span
+										ng-show="sortType == 'teacherName' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'teacherName' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 7%"
+										ng-click="sortType = 'birthday';sortReverse = !sortReverse">Ngày
+										sinh <span
+										ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'phone';sortReverse = !sortReverse">Số
+										điện thoại <span
+										ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'phone' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'address';sortReverse = !sortReverse">Địa
+										chỉ <span
+										ng-show="sortType == 'address' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'address' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+
+
+									<th style="width: 10%">Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
+									<td ng-bind="$index+1"><input type="hidden"
+										ng-model="x.id" /></td>
+									<td data-ng-bind="x.teacherId"></td>
+									<td data-ng-bind="x.teacherName"></td>
+									<td data-ng-bind="x.birthday"></td>
+									<td data-ng-bind="x.phone"></td>
+									<td data-ng-bind="x.address"></td>
+
+									<td>
+										<button data-toggle="modal" class="btn btn-success btn-sm"
+											data-tooltip="tooltip" title="View detail informations"
+											data-target="#myModal_detail" ng-click="chitiet(x)">
+											<span class="glyphicon glyphicon-eye-open"></span>
+										</button>
+										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
+											data-tooltip="tooltip" title="Edit" data-toggle="modal"
+											data-target="#myModal_sua">
+											<span class="glyphicon glyphicon-edit"></span>
+										</button>
+										<button data-toggle="modal" class="btn btn-danger btn-sm"
+											data-tooltip="tooltip" title="Delete"
+											data-target="#myModal_xoa" ng-click="xoa(x)">
+											<span class="glyphicon glyphicon-remove"></span>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<div class='pull-right'>
+						<uib-pagination
+							data-total-items="(list | filter:filterTable).length"
+							data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+							data-max-size="maxPaginationSize"
+							data-items-per-page="itemsPerPage" data-boundary-links="true"
+							data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
+							data-first-text="&laquo;" data-last-text="&raquo;">
+						</uib-pagination>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal thêm -->
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Thêm thông tin giáo
+						viên</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmStudentAdd"
+						enctype="multipart/form-data" id="fileUploadForm">
+						<div class="col-md-6">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Mã giáo viên</label>
+								<div class="">
+									<input id="teacherId" name="teacherId"
+										ng-keyup="hideDuplicateAlert()" class="form-control input-md"
+										ng-keydown="autoAdd($event)" type="text"
+										ng-model="add_teacherId" ng-required="false" />
+								</div>
+							</div>
+							<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+								style="color: red"></p>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Họ và tên giáo viên</label>
+								<div class="">
+									<input id="teacherName" name="teacherName"
+										class="form-control input-md" type="text"
+										ng-model="add_teacherName" ng-required="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Ngày Sinh</label>
+								<div class="">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="birthday" class="form-control input-md" type="date" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="selectbasic">Trình
+									độ</label>
+								<div class="">
+									<select class="form-control" name="degree" id="degree"
+										ng-model="add_degree" required="required">
+										<option value="College">Cao Đẳng</option>
+										<option value="University">Đại Học</option>
+										<option value="Master">Tiến sĩ</option>
+										<option value="Doctor">Thạc sĩ</option>
+									</select>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label">Chuyên môn</label>
+								<div class="">
+									<input id="chuyenmon" name="chuyenmon" rows="5"
+										class="form-control input-md" type="text"
+										ng-model="add_chuyenmon" />
+
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-12">
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Nơi đào tạo
+								</label>
+								<div class="">
+									<input id="noidaotao" name="noidaotao" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="add_noidaotao" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Số điện thoại</label> <input
+									id="phone" name="phone" placeholder=""
+									class="form-control input-md" type="text" ng-model="add_phone" />
+
+
+							</div>
+							<div class="form-group">
+								<label class="control-label">Địa chỉ</label>
+								<textarea id="address" name="address" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="add_address"></textarea>
+
+
+							</div>
+
+
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="them(false)">Add</button>
+					<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="them(true)">Add and close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal-->
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Sửa thông tin giáo
+						viên</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="editForm">
+						<div class="col-md-6">
+							<!--- text input-->
+							<input type="hidden" name="id" ng-model="edit_id" /> <input
+								type="hidden" name="teacherId" ng-model="edit_teacherId" />
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName"> Họ và tên </label>
+								<div class="">
+									<input id="teacherName" name="teacherName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="edit_teacherName" ng-required="true" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="birthday">Ngày sinh</label>
+								<div class="">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="edit_birthday" class="form-control input-md"
+										type="date" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Địa chỉ</label>
+								<div class="">
+									<input id="address" name="address"
+										class="form-control input-md" type="text"
+										ng-model="edit_address" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Trình độ</label>
+								<div class="">
+									<select id="degree" name="degree" class="form-control"
+										ng-model="edit_degree">
+										<option value="College">College</option>
+										<option value="University">University</option>
+										<option value="Master">Master</option>
+										<option value="Doctor">Doctor</option>
+									</select>
+								</div>
+							</div>
+
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="address">Chuyên môn</label>
+								<div class="">
+									<input type="text" id="chuyenmon" name="chuyenmon"
+										placeholder="" class="form-control input-md"
+										ng-model="edit_chuyenmon" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="address">Nơi đào tạo</label>
+								<div class="">
+									<input type="text" id="noidaotao" name="noidaotao"
+										placeholder="" class="form-control input-md"
+										ng-model="edit_noidaotao" />
+
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="update()" data-dismiss="modal">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal xem chi tiết -->
+	<div class="modal fade" id="myModal_detail" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Thông tin chi tiết</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmStudentView">
+						<div class="col-md-6">
+
+
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">Mã giáo viên</label>
+								<div class="">
+									<input id="teacherId" name="teacherId" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.teacherId" readonly="readonly"
+										ng-required="true" />
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">Họ và Tên
+									giáo viên</label>
+								<div class="">
+									<input id="teacherName" name="teacherName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="chitiet.teacherName" readonly="readonly" />
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="birthday">Ngày Sinh</label>
+								<div class="">
+									<input id="birthday" name="birthday"
+										class="form-control input-md" type="text"
+										ng-model="chitiet.birthday" readonly="readonly" />
+									<!-- <p>{{chitiet.birthday}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="address">Địa chỉ</label>
+								<div class="">
+									<input type="text" id="adress" name="address" placeholder=""
+										rows="5" class="form-control input-md" type="text"
+										ng-model="chitiet.address" readonly="readonly" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Số điện thoại</label>
+								<div class="">
+									<input type="text" id="phone" name="phone" placeholder=""
+										rows="5" class="form-control input-md" type="text"
+										ng-model="chitiet.phone" readonly="readonly" />
+
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label">Trình độ</label>
+								<div class="">
+									<select id="trinhdo" name="trinhdo" class="form-control"
+										readonly="readonly">
+										<option ng-bind="chitiet.trinhdo"></option>
+									</select>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="address">Chuyên môn</label>
+								<div class="">
+									<input type="text" id="chuyenmon" name="chuyenmon"
+										placeholder="" class="form-control input-md"
+										ng-model="chitiet.chuyenmon" readonly="readonly" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="address">Nơi đào tạo</label>
+								<div class="">
+									<input type="text" id="noidaotao" name="noidaotao"
+										placeholder="" class="form-control input-md"
+										ng-model="chitiet.noidaotao" readonly="readonly" />
+
+								</div>
+							</div>
+						</div>
+
+
+					</form>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal xóa -->
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Xác nhận</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<input type="hidden" ng-model="teacher_delete.id" />
+
+					<p>Bạn có chắc chắn muốn xóa không?</p>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="deleteTeacher()">Có</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
