@@ -14,23 +14,10 @@ app.config(function($routeProvider, $locationProvider) {
 	}).when("/giaovien", {
 		templateUrl : " giaovien.html",
 		controller : "instructorCtrl"
-	}).when("/employee", {
-		templateUrl : " employee.html",
-		controller : "employeeCtrl"
 	}).when("/cbyt", {
 		templateUrl : " cbyt.html",
 		controller : "cbytCtrl"
-	}).when("/parent", {
-			templateUrl : " phuhuynh.html",
-			controller : "parentCtrl"
-		
-	}).when("/phanlop", {
-		templateUrl : " phieuphanlop.html",
-		controller : "phanlopCtrl"
 	
-}).when("/dangkihoc", {
-	templateUrl : " dangkihoc.html",
-	controller : "nhaphocCtrl"
-
+	
 })
 	});

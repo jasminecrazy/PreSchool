@@ -32,7 +32,7 @@ app
 												$scope.chitiet.birthday = response.data.birthday;
 												$scope.chitiet.trinhdo = response.data.trinhdo;
 												$scope.chitiet.chuyenmon = response.data.chuyenmon;
-												$scope.chitiet.noidaotao = response.data.noidaotao;
+											
 												$scope.chitiet.address = response.data.address;
 												$scope.chitiet.phone = response.data.phone;
 												
@@ -53,7 +53,7 @@ app
 												birthday : $scope.birthday,
 												trinhdo : $scope.add_degree,
 												chuyenmon :$scope.add_chuyenmon,
-												noidaotao : $scope.add_noidaotao,
+												
 												address : $scope.add_address,
 												phone :$scope.add_phone
 
@@ -102,7 +102,7 @@ app
 												$scope.edit_degree = response.data.trinhdo;
 		
 												$scope.edit_chuyenmon = response.data.chuyenmon;
-												$scope.edit_noidaotao = response.data.noidaotao;
+												
 												$scope.edit_address = response.data.address;
 												$scope.edit_phone = response.data.phone;
 												$scope.edit_id = data.id;
@@ -119,7 +119,7 @@ app
 								birthday : $scope.edit_birthday,
 								trinhdo : $scope.edit_degree,
 								chuyenmon : $scope.edit_chuyenmon,
-								noidaotao : $scope.edit_noidaotao,
+								
 								address:$scope.edit_address,
 								phone:$scope.edit_phone
 							}
@@ -211,7 +211,7 @@ app
 							$scope.birthday = "";
 							$scope.add_chuyenmon = "";
 							$scope.add_degree = "";
-							$scope.add_noidaotao = "";
+							
 							$scope.add_phone = "";
 							$scope.add_address = "";
 			
@@ -230,7 +230,7 @@ app
 						        	$scope.add_chuyenmon = "Giao dục thể chất";
 									$scope.add_degree = "Cao Đẳng";
 									$scope.add_address =random;
-									$scope.add_noidaotao ="Bình Điền";
+									
 									$scope.birthday = new Date("3/25/1997");
 									$scope.add_phone ="01121";
 									

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.suong.entity.Cbyt;
-import com.suong.entity.Employee;
-import com.suong.entity.Hocsinh;
 @Repository
 public class CBYTDaoImpl implements CBYTDao{
 	@Autowired
