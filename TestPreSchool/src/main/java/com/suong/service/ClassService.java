@@ -2,16 +2,18 @@ package com.suong.service;
 
 import java.util.List;
 
-import com.suong.entity.Class1;
+import com.suong.entity.Giaovien;
+import com.suong.entity.Iclass;
 
 public interface ClassService {
-	public List<Class1> getAllClass();
+	public List<Iclass> getAllClass();
 
-	public Class1 getIClass(int id);
+	public Iclass getIClass(int id);
 
-	public void addIClass(Class1 iclass);
+	public void addIClass(Iclass iclass);
 
 	public void deleteIClass(int id);
 
-	public void updateIClass(Class1 iclass);
+	public void updateIClass(Iclass iclass);
+	public List<Giaovien> getAllTeacher();
 }

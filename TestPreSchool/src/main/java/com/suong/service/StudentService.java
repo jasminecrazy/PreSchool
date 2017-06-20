@@ -14,7 +14,7 @@ public interface StudentService {
 	public void deleteStudent(int id);
 
 	public void updateStudent(Hocsinh Student);
-	
+	public List<Iclass>getAllClass();
 
 	
 	

@@ -34,6 +34,7 @@
 									<th class="sortable" style="width: 5%">Mã lớp</th>
 									<th class="sortable" style="width: 7%">Tên lớp</th>
 									<th class="sortable" style="width: 7%">Sỉ số</th>
+									<th class="sortable" style="width: 7%">Năm học</th>
 									<th style="width: 10%">Action</th>
 
 								</tr>
@@ -42,11 +43,12 @@
 								<tr data-ng-repeat="x in list">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
-									<td data-ng-bind="x.classId"></td>
-									<td data-ng-bind="x.className"></td>
+									<td data-ng-bind="x.malop"></td>
+									<td data-ng-bind="x.tenlop"></td>
 									<td data-ng-bind="x.quantity"></td>
+									<td data-ng-bind="x.namhoc"></td>
 									<td>
-									
+
 										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
@@ -96,49 +98,69 @@
 							<div class="form-group">
 								<label class=" control-label" for="">Mã lớp</label>
 								<div class="">
-									<input id="classId" name="studentId" ng-keyup="hideDuplicateAlert()"
-										class="form-control input-md" type="text"
-										ng-model="class.classId" ng-required="false" />
+									<input id="classId" name="classId"
+										ng-keyup="hideDuplicateAlert()" 	ng-keydown="autoAdd($event)" class="form-control input-md"
+										type="text" ng-model="add_classId" ng-required="false" />
 								</div>
-								
+
 							</div>
 							<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-									style="color: red"></p>
+								style="color: red"></p>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Tên Lớp</label>
 								<div class="">
 									<input id="className" name="className"
 										class="form-control input-md" type="text"
-										ng-model="class.studentName" ng-required="false" />
+										ng-model="add_className" ng-required="false" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class=" control-label">Sỉ số</label>
 								<div class="">
-									<input id="quantity" name="quantity"
-										ng-model="class.quantity" class="form-control input-md" type="date" />
+									<input id="quantity" name="quantity" ng-model="add_quantity"
+										class="form-control input-md" type="number" />
 
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label class=" control-label">Năm học</label>
+								<div class="">
+									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
+										class="form-control input-md" type="text" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Giáo viên
+									chủ nhiệm</label>
+								<div class="">
+									<select ng-selected="student.teacher"
+										ng-model="add_teacherName" class="form-control"
+										ng-options="x.teacherName for x in list_teacher"
+										name="teacherName" id="teacherName" ng-required="true">
+									</select>
+								</div>
+							</div>
+
+
 						</div>
-				
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button id="btnSave" name="btnSave" class="btn btn-primary"
-					ng-click="them(false)">Add</button>
-				<button id="btnSave" name="btnSave" class="btn btn-default"
-					ng-click="them(true)">Add and close</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="them(false)">Add</button>
+					<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="them(true)">Add and close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
 
 			</div>
-
 		</div>
 	</div>
-</div>
-<!-- Modal Sửa -->
+	<!-- Modal Sửa -->
 	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -161,9 +183,10 @@
 							<div class="col-md-8">
 								<input id="classId" name="classId" placeholder=""
 									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
-									type="text" ng-model="class_edit.classId" ng-required="true" />
+									type="text" ng-model="edit_classId" ng-required="true" />
 								<span id="helpBlock" style="color: red" class="help-block"
-									ng-show="frmClass.classId.$error.required">Trường bắt buộc</span>
+									ng-show="frmClass.classId.$error.required">Trường bắt
+									buộc</span>
 								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
 									style="color: red"></p>
 							</div>
@@ -171,15 +194,14 @@
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-3 control-label">
-								Name</label>
+							<label class="col-md-3 control-label"> Name</label>
 							<div class="col-md-8">
 								<input id="className" name="className"
 									class="form-control input-md" type="text"
-									ng-model="class_edit.className" ng-required="true" /> <span
+									ng-model="edit_className" ng-required="true" /> <span
 									id="helpBlock" class="help-block" style="color: red"
-									ng-show="frmClass.className.$error.required">This
-									field is required</span>
+									ng-show="frmClass.className.$error.required">This field
+									is required</span>
 							</div>
 						</div>
 
@@ -189,14 +211,33 @@
 							<div class="col-md-8">
 								<input id="quantity" name="quantity" placeholder=""
 									class="form-control input-md" type="number" ng-required="true"
-									ng-model="class_edit.quantity" /> <span id="helpBlock"
+									ng-model="edit_quantity" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmClass.quantity.$error.required">This field
 									is required</span>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Năm học</label>
+							<div class="col-md-8">
+								<input id="namhoc" name="namhoc" placeholder=""
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="edit_namhoc" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="selectbasic">Giáo viên
+								chủ nhiệm</label>
+							<div class="col-md-8">
+								<select ng-selected="student.teacher" ng-model="edit_teacher"
+									class="form-control"
+									ng-options="x.teacherName for x in list_teacher"
+									name="teacherName" id="teacherName" ng-required="true">
+								</select>
+							</div>
+						</div>
 
-						
+
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -210,31 +251,31 @@
 	</div>
 	<!--  -->
 	<!-- Modal xóa -->
-<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel">
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Xác nhận</h4>
-			</div>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Xác nhận</h4>
+				</div>
 
-			<div class="modal-body">
+				<div class="modal-body">
 
-				<input type="hidden" ng-model="class_delete.id" />
+					<input type="hidden" ng-model="class_delete.id" />
 
-				<p>Bạn có chắc chắn muốn xóa không?</p>
-			</div>
+					<p>Bạn có chắc chắn muốn xóa không?</p>
+				</div>
 
-			<div class="modal-footer">
-				<a class="btn btn-danger btn-ok" ng-click="deleteClass()">Có</a>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="deleteClass()">Có</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
 
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!--  -->
+	<!--  -->
 </div>

@@ -1,7 +1,7 @@
 app
 		.controller(
 				'classCtrl',
-				function($scope, $http) {
+				function($scope, $http, $resource) {
 					$scope.list = [];
 					function getAllClass() {
 						$http({
@@ -14,12 +14,21 @@ app
 						});
 					}
 					getAllClass();
+					function getAllTeacher() {
+						 $scope.list_teacher = [];
+					        var Intake = $resource('http://localhost:8080/admin/api/classte');
+					        Intake.query().$promise.then(function(listteacher) {
+
+					            $scope.list_teacher = listteacher;
+					        });
+					}
+					getAllTeacher();
 					// Kiểm tra trùng ID
 					function id_duplicate_Add(id) {
 						var flag = true;
 						$scope.list.forEach(function(item, index) {
-							if (item.classId === id) {
-								$scope.duplicateAlert = "Duplicate ID";
+							if (item.malop === id) {
+								$scope.duplicateAlert = "Bạn nhập trùng mã lớp";
 
 								flag = false;
 							}
@@ -38,9 +47,11 @@ app
 								method : "POST",
 								url : "http://localhost:8080/admin/api/class",
 								data : {
-									classId : school_id,
-									className : school_name,
-									quantity : quantity
+									malop : $scope.add_classId,
+									tenlop : $scope.add_className,
+									namhoc : $scope.add_namhoc,
+									quantity : $scope.add_quantity,
+									giaovien :$scope.add_teacherName
 								},
 
 								dataType : "json"
@@ -66,7 +77,7 @@ app
 
 					}
 					// Lấy dữ liệu cho form sửa
-					$scope.class_edit = [];
+					
 					var classID = ""
 					$scope.sua = function(data) {
 						$http
@@ -75,11 +86,19 @@ app
 												+ data.id)
 								.then(
 										function(response) {
+										
 											classID = data.id;
-											$scope.class_edit.classId = response.data.classId;
-											$scope.class_edit.className = response.data.className;
-											$scope.class_edit.quantity = response.data.quantity;
-											$scope.class_edit.id = data.id;
+											$scope.edit_classId = response.data.malop;
+											$scope.edit_className = response.data.tenlop;
+											$scope.edit_quantity = response.data.quantity;
+											$scope.edit_id = data.id;
+											$scope.edit_namhoc = response.data.namhoc;
+											  for (var i = 0; i < $scope.list_teacher.length; i++) {
+									                if (response.data.giaovien.teacherName == $scope.list_teacher[i].teacherName) {
+									                    $scope.edit_teacher = $scope.list_teacher[i];
+									                    break;
+									                }
+									            }
 
 										});
 					}
@@ -104,7 +123,7 @@ app
 					$scope.update =function ()
 					{
 						
-							var classObj ={id:$scope.class_edit.id,classId:$scope.class_edit.classId,className:$scope.class_edit.className,quantity:$scope.class_edit.quantity}	
+							var classObj ={id:$scope.edit_id,malop:$scope.edit_classId,tenlop:$scope.edit_className,quantity:$scope.edit_quantity,namhoc:$scope.edit_namhoc,giaovien:$scope.edit_teacher}	
 						
 						$http({
 							method:"PUT",
@@ -159,6 +178,7 @@ app
 							showConfirmButton : false
 						});
 					}
+					  var alertDuration = 1800;
 					function alertFailMessage(message) {
 						swal({
 							title : "",
@@ -186,5 +206,21 @@ app
 			    		  	  showConfirmButton: false
 			    		  	});
 			      	  }
+					function getRandomInt(min, max) {
+						return Math.floor(Math.random() * (max - min + 1)) + min;
+					}
+					//Hàm điền tự động
+					 $scope.autoAdd = function(keyEvent) {    		  
+					        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
+					        	var random = getRandomInt(1, 10000);
+					        	$scope.add_classId ="CL" + random;
+					        	$scope.add_className = "Mai";
+								$scope.add_namhoc = "2014";
+								$scope.add_quantity = 30;
+								$scope.add_teacherName ="Mai";
+							
+							
+					        }
+					        }
 
 				});

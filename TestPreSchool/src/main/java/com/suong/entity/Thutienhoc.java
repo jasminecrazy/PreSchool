@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 19, 2017 8:57:33 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 20, 2017 8:30:48 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -26,25 +26,27 @@ public class Thutienhoc implements java.io.Serializable {
 
 	private Integer id;
 	private Hocsinh hocsinh;
-	private String sobienlai;
+	private String mabienlai;
 	private Date ngaythu;
 	private int tienhocphi;
 	private float tienan;
 	private float tienphuthu;
 	private float tongtien;
+	private String namhoc;
 
 	public Thutienhoc() {
 	}
 
-	public Thutienhoc(Hocsinh hocsinh, String sobienlai, Date ngaythu, int tienhocphi, float tienan, float tienphuthu,
-			float tongtien) {
+	public Thutienhoc(Hocsinh hocsinh, String mabienlai, Date ngaythu, int tienhocphi, float tienan, float tienphuthu,
+			float tongtien, String namhoc) {
 		this.hocsinh = hocsinh;
-		this.sobienlai = sobienlai;
+		this.mabienlai = mabienlai;
 		this.ngaythu = ngaythu;
 		this.tienhocphi = tienhocphi;
 		this.tienan = tienan;
 		this.tienphuthu = tienphuthu;
 		this.tongtien = tongtien;
+		this.namhoc = namhoc;
 	}
 
 	@Id
@@ -69,13 +71,13 @@ public class Thutienhoc implements java.io.Serializable {
 		this.hocsinh = hocsinh;
 	}
 
-	@Column(name = "Sobienlai", nullable = false, length = 10)
-	public String getSobienlai() {
-		return this.sobienlai;
+	@Column(name = "mabienlai", nullable = false, length = 50)
+	public String getMabienlai() {
+		return this.mabienlai;
 	}
 
-	public void setSobienlai(String sobienlai) {
-		this.sobienlai = sobienlai;
+	public void setMabienlai(String mabienlai) {
+		this.mabienlai = mabienlai;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -122,6 +124,15 @@ public class Thutienhoc implements java.io.Serializable {
 
 	public void setTongtien(float tongtien) {
 		this.tongtien = tongtien;
+	}
+
+	@Column(name = "namhoc", nullable = false, length = 50)
+	public String getNamhoc() {
+		return this.namhoc;
+	}
+
+	public void setNamhoc(String namhoc) {
+		this.namhoc = namhoc;
 	}
 
 }

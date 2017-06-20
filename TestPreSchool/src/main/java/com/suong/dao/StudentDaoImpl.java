@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.suong.entity.Hocsinh;
+import com.suong.entity.Iclass;
 @Repository
 public class StudentDaoImpl implements StudentDao{
 	@Autowired
@@ -36,6 +37,11 @@ public class StudentDaoImpl implements StudentDao{
 	public void updateStudent(Hocsinh Student) {
 		session.getCurrentSession().update(Student);
 		
+	}
+	@SuppressWarnings("unchecked")
+	public List<Iclass> getAllClass() {
+		
+		return session.getCurrentSession().createQuery("from Iclass").list();
 	}
 	
 }

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.suong.dao.ClassDao;
-import com.suong.entity.Class1;
+import com.suong.entity.Giaovien;
+import com.suong.entity.Iclass;
 
 @Service
 public class ClassServiceImpl implements ClassService{
@@ -15,17 +16,17 @@ public class ClassServiceImpl implements ClassService{
 	@Autowired
 	private ClassDao classDao;
 		@Transactional
-	public List<Class1> getAllClass() {
+	public List<Iclass> getAllClass() {
 			return classDao.getAllClass();
 	}
 
 	@Transactional
-	public Class1 getIClass(int id) {
+	public Iclass getIClass(int id) {
 		return classDao.getIClass(id);
 	}
 
 	@Transactional
-	public void addIClass(Class1 iclass) {
+	public void addIClass(Iclass iclass) {
 		classDao.addIClass(iclass);
 		
 	}
@@ -37,9 +38,14 @@ public class ClassServiceImpl implements ClassService{
 	}
 
 	@Transactional
-	public void updateIClass(Class1 iclass) {
+	public void updateIClass(Iclass iclass) {
 		classDao.updateIClass(iclass);
 		
+	}
+
+	@Transactional
+	public List<Giaovien> getAllTeacher() {
+		return classDao.getAllTeacher();
 	}
 
 }

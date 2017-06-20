@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 19, 2017 8:57:33 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 20, 2017 8:30:48 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,8 +25,6 @@ import org.hibernate.annotations.Proxy;
 public class Nktheodoi implements java.io.Serializable {
 
 	private Integer id;
-	private Class1 class1;
-	private Giaovien giaovien;
 	private Hocsinh hocsinh;
 	private Date ngaytheodoi;
 	private boolean tinhtrang;
@@ -35,10 +33,7 @@ public class Nktheodoi implements java.io.Serializable {
 	public Nktheodoi() {
 	}
 
-	public Nktheodoi(Class1 class1, Giaovien giaovien, Hocsinh hocsinh, Date ngaytheodoi, boolean tinhtrang,
-			String bieuhiencuatre) {
-		this.class1 = class1;
-		this.giaovien = giaovien;
+	public Nktheodoi(Hocsinh hocsinh, Date ngaytheodoi, boolean tinhtrang, String bieuhiencuatre) {
 		this.hocsinh = hocsinh;
 		this.ngaytheodoi = ngaytheodoi;
 		this.tinhtrang = tinhtrang;
@@ -55,26 +50,6 @@ public class Nktheodoi implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "malop", nullable = false)
-	public Class1 getClass1() {
-		return this.class1;
-	}
-
-	public void setClass1(Class1 class1) {
-		this.class1 = class1;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "magiaovien", nullable = false)
-	public Giaovien getGiaovien() {
-		return this.giaovien;
-	}
-
-	public void setGiaovien(Giaovien giaovien) {
-		this.giaovien = giaovien;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

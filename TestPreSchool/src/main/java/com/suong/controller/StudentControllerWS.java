@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.suong.entity.Giaovien;
 import com.suong.entity.Hocsinh;
+import com.suong.entity.Iclass;
 import com.suong.service.StudentService;
 
 @RestController
@@ -79,6 +81,10 @@ public class StudentControllerWS {
 		// return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		// }
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	@RequestMapping(value = "admin/api/studentcl", method = RequestMethod.GET)
+	public ResponseEntity<List<Iclass>> getAllEntranceExam() {
+		return new ResponseEntity<>(service.getAllClass(), HttpStatus.OK);
 	}
 
 }

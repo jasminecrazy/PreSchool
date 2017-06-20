@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 19, 2017 8:57:33 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 20, 2017 8:30:48 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,7 +1,7 @@
 app
 		.controller(
 				'studentCtrl',
-				function($scope, $http) {
+				function($scope, $http, $resource) {
 					$scope.list = [];
 					function getAllStudent() {
 						$http({
@@ -14,10 +14,63 @@ app
 						});
 					}
 					getAllStudent();
+					$scope.rowdata = {
+						     availableOptions: [
+						    	 {id: '15', name: '15'},
+							       {id: '30', name: '30'},
+							       {id: '50', name: '50'},
+							       {id: '100', name: '100'}
+						     ],
+						     selectedOption: {id: '15', name: '15 rows'}
+						    };
+					$scope.ChangeRow=function(index){
+						$scope.itemsPerPage = index;
+						$scope.updatePageIndexes();
+					}
+					// Phân trang
+			    	$scope.currentPage = 1;
+			    	// max size of the pagination bar
+			    	$scope.maxPaginationSize = 10;
+			    	$scope.itemsPerPage = 15;
+			    	$scope.updatePageIndexes = function () {
+			    		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+			    		if (totalPages <= 10) {
+			                // less than 10 total pages so show all
+			    			$scope.firstIndex = 1;
+			    			$scope.lastIndex = totalPages;
+			            } else {
+			                // more than 10 total pages so calculate start and end pages
+			                if ($scope.currentPage <= 6) {
+			                	$scope.firstIndex = 1;
+			                	$scope.lastIndex = 10;
+			                } else if ($scope.currentPage + 4 >= totalPages) {
+			                	$scope.firstIndex = totalPages - 9;
+			                	$scope.lastIndex = totalPages;
+			                } else {
+			                	$scope.firstIndex = $scope.currentPage - 5;
+			                	$scope.lastIndex = $scope.currentPage + 4;
+			                }
+			            }
+			    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+			    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+			    	};
+			    	$scope.updatePageIndexes();
+			    	
+			    	$scope.showList=function(school,index){
+			    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+			    	}
+					function getAllClass() {
+						 $scope.list_class = [];
+					        var Intake = $resource('http://localhost:8080/admin/api/studentcl');
+					        Intake.query().$promise.then(function(listclass) {
+
+					            $scope.list_class= listclass;
+					            console.log($scope.list_class);
+					        });
+					}
+					getAllClass();
 					 $scope.sortType = 'studentName';
 					 $scope.filterTable =' ';
-					
-					
 					// add Student
 					$scope.them = function(close) {
 						
@@ -33,7 +86,8 @@ app
 											gioitinh : $scope.gender,
 											diachi :$scope.add_address,
 											ngayvaotruong : $scope.add_ngayvaotruong,
-											tinhtrangsuckhoe : $scope.add_healthStatus
+											tinhtrangsuckhoe : $scope.add_healthStatus,
+											iclass:$scope.add_className
 
 										},
 										dataType : "json"
@@ -83,8 +137,15 @@ app
 											$scope.edit_ngayvaotruong = new Date(response.data.ngayvaotruong);
 											$scope.edit_gender = response.data.gioitinh == 0 ? '0': '1';
 											$scope.edit_healthStatus = response.data.tinhtrangsuckhoe;
+											
 											$scope.edit_id = data.id;
 											$scope.edit_studentId=data.studentId;
+											for (var i = 0; i < $scope.list_class.length; i++) {
+								                if (response.data.iclass.malop == $scope.list_class[i].malop) {
+								                    $scope.edit_className = $scope.list_class[i];
+								                    break;
+								                }
+								            }
 										});
 
 					}
@@ -98,7 +159,8 @@ app
 							gioitinh : $scope.edit_gender,
 							diachi : $scope.edit_address,
 							ngayvaotruong : $scope.edit_ngayvaotruong,
-							tinhtrangsuckhoe:$scope.edit_healthStatus
+							tinhtrangsuckhoe:$scope.edit_healthStatus,
+							iclass : $scope.edit_className
 						}
 						$http({
 							method : "PUT",
@@ -132,6 +194,7 @@ app
 											$scope.chitiet.address = response.data.diachi;
 											$scope.chitiet.ngayvaotruong = new Date (response.data.ngayvaotruong);
 											$scope.chitiet.healthStatus = response.data.tinhtrangsuckhoe;
+											
 											
 										});
 					}

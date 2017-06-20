@@ -24,7 +24,12 @@
 				</div>
 
 				<div class="x_content">
-
+					<label for="mySelect">Display </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> rows</label>
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -70,14 +75,19 @@
 										ng-show="sortType == 'diachi' &amp;&amp; sortReverse"
 										class="fa fa-caret-up"></span>
 									</th>
-									
+
+									<th class="sortable" style="width: 5%">Lớp</th>
+
+
+
 
 									<th style="width: 10%">Action</th>
 
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
+								<tr
+									data-ng-repeat="x in list |  orderBy:sortType:sortReverse| filter : filterTable"">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.studentId"></td>
@@ -85,6 +95,7 @@
 									<td data-ng-bind="x.ngaysinh"></td>
 									<td data-ng-bind="x.gioitinh ? 'Nữ' : 'Nam'"></td>
 									<td data-ng-bind="x.diachi"></td>
+									<td data-ng-bind="x.iclass.tenlop"></td>
 
 									<td>
 										<button data-toggle="modal" class="btn btn-success btn-sm"
@@ -117,7 +128,6 @@
 							data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
 							data-first-text="&laquo;" data-last-text="&raquo;">
 						</uib-pagination>
-
 					</div>
 				</div>
 			</div>
@@ -190,8 +200,6 @@
 
 								</div>
 							</div>
-						</div>
-						<div class="form-group col-md-12">
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Ngày vào
 									trường</label>
@@ -203,15 +211,28 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Tình trạng sức khỏe</label> 
-								<input
+								<label class="control-label">Tình trạng sức khỏe</label> <input
 									id="healthStatus" name="healthStatus" placeholder=""
-									class="form-control input-md" type="text" ng-model="add_healthStatus" />
+									class="form-control input-md" type="text"
+									ng-model="add_healthStatus" />
 
 
 							</div>
-
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Lớp</label>
+								<div class="">
+									<select ng-selected="student.class" ng-model="add_className"
+										class="form-control"
+										ng-options="x.tenlop for x in list_class" name="className"
+										id="className" ng-required="true">
+									</select>
+								</div>
+							</div>
 						</div>
+
+
+
+
 
 					</form>
 				</div>
@@ -284,14 +305,24 @@
 
 								</div>
 							</div>
-							
+
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Tình trạng sức khỏe</label>
+								<label class=" control-label" for="birthday">Tình trạng
+									sức khỏe</label>
 								<div class="">
 									<input id="healthStatus" name="healthStatus" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="edit_healthStatus" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Lớp</label>
+								<div class="">
+									<select ng-selected="student.class" ng-model="edit_className"
+										class="form-control" ng-options="x.tenlop for x in list_class"
+										name="className" id="className" ng-required="true">
+									</select>
 								</div>
 							</div>
 
@@ -348,7 +379,8 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">Họ và Tên trẻ</label>
+								<label class="control-label" for="firstName">Họ và Tên
+									trẻ</label>
 								<div class="">
 									<input id="firstName" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
@@ -377,24 +409,27 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="address">Ngày vào trường</label>
+								<label class="control-label" for="address">Ngày vào
+									trường</label>
 								<div class="">
-									<input type="date" id="ngayvaotruong" name="ngayvaotruong" placeholder=""
-										 class="form-control input-md"
+									<input type="date" id="ngayvaotruong" name="ngayvaotruong"
+										placeholder="" class="form-control input-md"
 										ng-model="chitiet.ngayvaotruong" readonly="readonly" />
 
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="address">Tình trạng sức khỏe</label>
+								<label class="control-label" for="address">Tình trạng
+									sức khỏe</label>
 								<div class="">
-									<input type="text" id="healthStatus" name="healthStatus" placeholder=""
-										 class="form-control input-md"
+									<input type="text" id="healthStatus" name="healthStatus"
+										placeholder="" class="form-control input-md"
 										ng-model="chitiet.healthStatus" readonly="readonly" />
 
 								</div>
 							</div>
+
 						</div>
 						<div class="col-md-6">
 

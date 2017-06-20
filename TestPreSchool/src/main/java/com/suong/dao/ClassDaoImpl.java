@@ -6,30 +6,43 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.suong.entity.Class1;
+import com.suong.entity.Giaovien;
+import com.suong.entity.Iclass;
 
 @Repository
-public class ClassDaoImpl implements ClassDao{
+public class ClassDaoImpl implements ClassDao {
 
 	@Autowired
 	private SessionFactory sesion;
+
 	@SuppressWarnings("unchecked")
-	public List<Class1> getAllClass() {
-		return sesion.getCurrentSession().createQuery("from Class1").list();
+	public List<Iclass> getAllClass() {
+		return sesion.getCurrentSession().createQuery("from Iclass").list();
 	}
-	public Class1 getIClass(int id) {
-		return sesion.getCurrentSession().load(Class1.class, id);
+
+	public Iclass getIClass(int id) {
+		return sesion.getCurrentSession().load(Iclass.class, id);
 	}
-	public void addIClass(Class1 iclass) {
+
+	public void addIClass(Iclass iclass) {
 		sesion.getCurrentSession().save(iclass);
-		
+
 	}
+
 	public void deleteIClass(int id) {
 		sesion.getCurrentSession().delete(getIClass(id));
-		
+
 	}
-	public void updateIClass(Class1 iclass) {
+
+	public void updateIClass(Iclass iclass) {
 		sesion.getCurrentSession().update(iclass);
+	}
+
+	@SuppressWarnings("unchecked")
+
+	public List<Giaovien> getAllTeacher() {
+
+		return sesion.getCurrentSession().createQuery("from Giaovien").list();
 	}
 
 }

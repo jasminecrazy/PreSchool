@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.suong.dao.StudentDao;
 import com.suong.entity.Hocsinh;
+import com.suong.entity.Iclass;
 @Service
 public class StudentServiceImpl implements StudentService{
 	@Autowired
@@ -37,6 +38,12 @@ public class StudentServiceImpl implements StudentService{
 	@Transactional
 	public void updateStudent(Hocsinh Student) {
 		studentDao.updateStudent(Student);
+	}
+
+	@Transactional
+	public List<Iclass> getAllClass() {
+		
+		return studentDao.getAllClass();
 	}
 
 
