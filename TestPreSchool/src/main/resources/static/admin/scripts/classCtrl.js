@@ -244,11 +244,16 @@ app
 								data : {
 									'tinhtrang': $scope.add_diemdanh,
 									'ngaytheodoi': new Date(),
-									'hocsinh' : $scope.add_hocsinh
+									'hocsinh' : { 'id' : $scope.add_hocsinh }
 								},
 
 								dataType : "json"
-							}).then(function (error)
+							}).then(function(result){
+							if(result.status ==201)
+								{
+								addAlert();
+								}
+						}, function (error)
 									{
 								alert('fail');
 									});
