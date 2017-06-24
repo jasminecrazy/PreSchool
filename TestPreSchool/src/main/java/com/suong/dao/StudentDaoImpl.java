@@ -43,5 +43,10 @@ public class StudentDaoImpl implements StudentDao{
 		
 		return session.getCurrentSession().createQuery("from Iclass").list();
 	}
+	@SuppressWarnings("unchecked")
+	public List<Hocsinh> getStudentByClassId(int classId) {
+		// TODO Auto-generated method stub
+		return session.getCurrentSession().createQuery("from Hocsinh t where t.iclass.id = :id").setInteger("id", classId).list();
+	}
 	
 }

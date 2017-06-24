@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.suong.dao.ClassDao;
 import com.suong.entity.Giaovien;
+import com.suong.entity.Hocsinh;
 import com.suong.entity.Iclass;
 
 @Service
@@ -46,6 +47,11 @@ public class ClassServiceImpl implements ClassService{
 	@Transactional
 	public List<Giaovien> getAllTeacher() {
 		return classDao.getAllTeacher();
+	}
+
+	@Transactional
+	public List<Hocsinh> getStudent(int id) {
+				return classDao.getStudent(id);
 	}
 
 }

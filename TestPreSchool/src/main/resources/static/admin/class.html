@@ -48,7 +48,12 @@
 									<td data-ng-bind="x.quantity"></td>
 									<td data-ng-bind="x.namhoc"></td>
 									<td>
-
+									<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> --> 
+										   <button class="btn btn-primary btn-sm" ng-click="getStudents(x.id)"
+											data-tooltip="tooltip" title="Detail" data-toggle="modal" data-target="#studentModal"
+											>
+											<span class="glyphicon glyphicon-list"></span>
+										</button>
 										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
@@ -99,8 +104,9 @@
 								<label class=" control-label" for="">Mã lớp</label>
 								<div class="">
 									<input id="classId" name="classId"
-										ng-keyup="hideDuplicateAlert()" 	ng-keydown="autoAdd($event)" class="form-control input-md"
-										type="text" ng-model="add_classId" ng-required="false" />
+										ng-keyup="hideDuplicateAlert()" ng-keydown="autoAdd($event)"
+										class="form-control input-md" type="text"
+										ng-model="add_classId" ng-required="false" />
 								</div>
 
 							</div>
@@ -183,8 +189,8 @@
 							<div class="col-md-8">
 								<input id="classId" name="classId" placeholder=""
 									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
-									type="text" ng-model="edit_classId" ng-required="true" />
-								<span id="helpBlock" style="color: red" class="help-block"
+									type="text" ng-model="edit_classId" ng-required="true" /> <span
+									id="helpBlock" style="color: red" class="help-block"
 									ng-show="frmClass.classId.$error.required">Trường bắt
 									buộc</span>
 								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
@@ -226,8 +232,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label" for="selectbasic">Giáo viên
-								chủ nhiệm</label>
+							<label class="col-md-3 control-label" for="selectbasic">Giáo
+								viên chủ nhiệm</label>
 							<div class="col-md-8">
 								<select ng-selected="student.teacher" ng-model="edit_teacher"
 									class="form-control"
@@ -278,4 +284,60 @@
 		</div>
 	</div>
 	<!--  -->
+	<!-- Modal student -->
+	<div class="modal fade" id="studentModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">List of students</h4>
+					<span ng-model="add_ngaytheodoi">Ngày {{date | date:'dd-MM-yyyy'}}</span>
+					<button class="btn btn-primary btn-sm pull-right">Xem chi tiết</button>
+					<input id="timkiem" type="text" placeholder="Tìm kiếm"
+						class="form-control" data-ng-model="search"></input>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Mã trẻ</th>
+									<th>Họ tên</th>
+									<th>Trạng thái</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in listStudent | filter: search">
+									<td  ng-bind="$index +1"></td>
+									<td  ng-bind="x[1]"></td>
+									<td  ng-bind="x[2]"></td>
+									<td  ng-model="add_hocsinh" ng-bind="x[0]"></td>
+									<td>
+									Có mặt <input type="checkbox" value="0" ng-model="add_diemdanh"/>
+									
+									</td>
+									<td>
+									<button class="btn btn-sm btn-success"><a href="#/"><span class="glyphicon glyphicon-usd"></span></a></button>
+									</td>
+									
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="diemDanh()" >Điểm danh</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

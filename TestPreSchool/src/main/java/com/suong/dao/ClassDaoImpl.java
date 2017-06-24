@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.suong.entity.Giaovien;
+import com.suong.entity.Hocsinh;
 import com.suong.entity.Iclass;
 
 @Repository
@@ -43,6 +44,15 @@ public class ClassDaoImpl implements ClassDao {
 	public List<Giaovien> getAllTeacher() {
 
 		return sesion.getCurrentSession().createQuery("from Giaovien").list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Hocsinh> getStudent(int id) {
+	
+		return sesion.getCurrentSession()
+				.createQuery(
+						"select id, studentId, studentName from Hocsinh s where s.iclass.id = :id order by studentId, studentName")
+				.setInteger("id", id).list();
 	}
 
 }

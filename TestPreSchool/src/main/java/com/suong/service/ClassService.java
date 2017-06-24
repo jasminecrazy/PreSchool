@@ -3,6 +3,7 @@ package com.suong.service;
 import java.util.List;
 
 import com.suong.entity.Giaovien;
+import com.suong.entity.Hocsinh;
 import com.suong.entity.Iclass;
 
 public interface ClassService {
@@ -16,4 +17,5 @@ public interface ClassService {
 
 	public void updateIClass(Iclass iclass);
 	public List<Giaovien> getAllTeacher();
+	public List<Hocsinh>getStudent(int id);
 }

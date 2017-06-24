@@ -3,6 +3,7 @@ package com.suong.dao;
 import java.util.List;
 
 import com.suong.entity.Giaovien;
+import com.suong.entity.Hocsinh;
 import com.suong.entity.Iclass;
 
 public interface ClassDao {
@@ -16,4 +17,5 @@ public interface ClassDao {
 
 	public void updateIClass(Iclass iclass);
 	public List<Giaovien>getAllTeacher();
+	public List<Hocsinh>getStudent(int id);
 }

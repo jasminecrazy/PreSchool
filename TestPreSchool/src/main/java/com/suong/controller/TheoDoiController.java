@@ -39,7 +39,7 @@ public class TheoDoiController {
 		return new ResponseEntity<>(theodoi,HttpStatus.OK);
 	}
 	@RequestMapping(value = "admin/api/follow",method=RequestMethod.POST)
-	public ResponseEntity<Void>addClass(@RequestBody Nktheodoi theodoi)
+	public ResponseEntity<Void>addTheodoi(@RequestBody Nktheodoi theodoi)
 	{
 		try {
 			theodoiService.addTheoDoi(theodoi);
@@ -49,7 +49,7 @@ public class TheoDoiController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	@RequestMapping(value = "admin/api/follow",method=RequestMethod.PUT)
-	public ResponseEntity<Void>updateHealth(@RequestBody Nktheodoi theodoi)
+	public ResponseEntity<Void>updateTheoDoi(@RequestBody Nktheodoi theodoi)
 	{
 		try {
 			theodoiService.updateTheoDoi(theodoi);
@@ -60,7 +60,7 @@ public class TheoDoiController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	@RequestMapping(value = "admin/api/follow/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteHealth(@PathVariable int id) {
+	public ResponseEntity<Void> deleteTheoDoi(@PathVariable int id) {
 		try {
 			theodoiService.deleteTheodoi(id);
 		} catch (Exception ex) {
@@ -68,8 +68,8 @@ public class TheoDoiController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	@RequestMapping(value = "admin/api/studentHealth", method = RequestMethod.GET)
-	public ResponseEntity<List<Hocsinh>> getAllEntranceExam() {
+	@RequestMapping(value = "admin/api/theodoihs", method = RequestMethod.GET)
+	public ResponseEntity<List<Hocsinh>> getAllTheoDoiStudent() {
 		return new ResponseEntity<>(theodoiService.getAllStudent(), HttpStatus.OK);
 	}
 	

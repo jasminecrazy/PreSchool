@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.suong.entity.Giaovien;
+import com.suong.entity.Hocsinh;
 import com.suong.entity.Iclass;
 import com.suong.service.ClassService;
 
@@ -69,6 +71,9 @@ public class ClassController {
 	public ResponseEntity<List<Giaovien>> getAllEntranceExam() {
 		return new ResponseEntity<>(classService.getAllTeacher(), HttpStatus.OK);
 	}
-	
+	@RequestMapping(value = "admin/api/class/get-students/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Hocsinh>> getStudents(@PathVariable int id) {
+		return new ResponseEntity<>(classService.getStudent(id), HttpStatus.OK);
+	}
 	
 }

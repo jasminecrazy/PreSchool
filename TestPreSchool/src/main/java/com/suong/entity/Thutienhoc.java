@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 20, 2017 8:30:48 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,6 +33,8 @@ public class Thutienhoc implements java.io.Serializable {
 	private float tienphuthu;
 	private float tongtien;
 	private String namhoc;
+	private Integer tiendadong;
+	private Integer tienchuadong;
 
 	public Thutienhoc() {
 	}
@@ -47,6 +49,20 @@ public class Thutienhoc implements java.io.Serializable {
 		this.tienphuthu = tienphuthu;
 		this.tongtien = tongtien;
 		this.namhoc = namhoc;
+	}
+
+	public Thutienhoc(Hocsinh hocsinh, String mabienlai, Date ngaythu, int tienhocphi, float tienan, float tienphuthu,
+			float tongtien, String namhoc, Integer tiendadong, Integer tienchuadong) {
+		this.hocsinh = hocsinh;
+		this.mabienlai = mabienlai;
+		this.ngaythu = ngaythu;
+		this.tienhocphi = tienhocphi;
+		this.tienan = tienan;
+		this.tienphuthu = tienphuthu;
+		this.tongtien = tongtien;
+		this.namhoc = namhoc;
+		this.tiendadong = tiendadong;
+		this.tienchuadong = tienchuadong;
 	}
 
 	@Id
@@ -133,6 +149,24 @@ public class Thutienhoc implements java.io.Serializable {
 
 	public void setNamhoc(String namhoc) {
 		this.namhoc = namhoc;
+	}
+
+	@Column(name = "tiendadong")
+	public Integer getTiendadong() {
+		return this.tiendadong;
+	}
+
+	public void setTiendadong(Integer tiendadong) {
+		this.tiendadong = tiendadong;
+	}
+
+	@Column(name = "tienchuadong")
+	public Integer getTienchuadong() {
+		return this.tienchuadong;
+	}
+
+	public void setTienchuadong(Integer tienchuadong) {
+		this.tienchuadong = tienchuadong;
 	}
 
 }

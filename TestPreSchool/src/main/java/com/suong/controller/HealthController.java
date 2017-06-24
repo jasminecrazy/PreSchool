@@ -70,11 +70,11 @@ public class HealthController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	@RequestMapping(value = "admin/api/studentHealth", method = RequestMethod.GET)
-	public ResponseEntity<List<Hocsinh>> getAllEntranceExam() {
+	public ResponseEntity<List<Hocsinh>> getAllStudentHealth() {
 		return new ResponseEntity<>(healthService.getAllStudent(), HttpStatus.OK);
 	}
 	@RequestMapping(value = "admin/api/cbytHealth", method = RequestMethod.GET)
-	public ResponseEntity<List<Cbyt>> getAllCBYT() {
+	public ResponseEntity<List<Cbyt>> getAllCBYTHealth() {
 		return new ResponseEntity<>(healthService.getAllCBYT(), HttpStatus.OK);
 	}
 }

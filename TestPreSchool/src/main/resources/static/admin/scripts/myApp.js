@@ -17,7 +17,15 @@ app.config(function($routeProvider, $locationProvider) {
 	}).when("/cbyt", {
 		templateUrl : " cbyt.html",
 		controller : "cbytCtrl"
-	
+	}).when("/follow", {
+		templateUrl : " theodoi.html",
+		controller : "followCtrl"
+	}).when("/thutien", {
+		templateUrl : " thutien.html",
+		controller : "thutienCtrl"	
+	}).when("/studentList", {
+		templateUrl : " studentList.html",
+		controller : "studentListCtrl"	
 	
 })
 

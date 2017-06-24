@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 20, 2017 8:30:48 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,16 +28,14 @@ public class Nktheodoi implements java.io.Serializable {
 	private Hocsinh hocsinh;
 	private Date ngaytheodoi;
 	private boolean tinhtrang;
-	private String bieuhiencuatre;
 
 	public Nktheodoi() {
 	}
 
-	public Nktheodoi(Hocsinh hocsinh, Date ngaytheodoi, boolean tinhtrang, String bieuhiencuatre) {
+	public Nktheodoi(Hocsinh hocsinh, Date ngaytheodoi, boolean tinhtrang) {
 		this.hocsinh = hocsinh;
 		this.ngaytheodoi = ngaytheodoi;
 		this.tinhtrang = tinhtrang;
-		this.bieuhiencuatre = bieuhiencuatre;
 	}
 
 	@Id
@@ -79,15 +77,6 @@ public class Nktheodoi implements java.io.Serializable {
 
 	public void setTinhtrang(boolean tinhtrang) {
 		this.tinhtrang = tinhtrang;
-	}
-
-	@Column(name = "bieuhiencuatre", nullable = false)
-	public String getBieuhiencuatre() {
-		return this.bieuhiencuatre;
-	}
-
-	public void setBieuhiencuatre(String bieuhiencuatre) {
-		this.bieuhiencuatre = bieuhiencuatre;
 	}
 
 }

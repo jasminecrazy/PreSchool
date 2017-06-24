@@ -46,6 +46,12 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.getAllClass();
 	}
 
+	@Transactional
+	public List<Hocsinh> getStudentByClassId(int classId) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentByClassId(classId);
+	}
+
 
 
 }

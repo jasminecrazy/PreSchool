@@ -86,5 +86,18 @@ public class StudentControllerWS {
 	public ResponseEntity<List<Iclass>> getAllEntranceExam() {
 		return new ResponseEntity<>(service.getAllClass(), HttpStatus.OK);
 	}
+	@RequestMapping(value = "admin/api/liststudent/{classId}", method = RequestMethod.GET)
+	public ResponseEntity<List<Hocsinh>>getStudentById(@PathVariable int classId)
+	{
+		List<Hocsinh> list ;
+		try {
+			list = service.getStudentByClassId(classId);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(list,HttpStatus.ACCEPTED);
+	
+	}
 
 }

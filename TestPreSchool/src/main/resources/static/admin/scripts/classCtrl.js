@@ -222,5 +222,37 @@ app
 							
 					        }
 					        }
+					 $scope.getStudents = function getStudent(id)
+						{
+						 $scope.date = new Date();
+						$http({
+								method : "GET",
+								url : "http://localhost:8080/admin/api/class/get-students/"+id
+							}).then(function mySucess(response){
+								
+								$scope.listStudent = response.data;
+							},
+							function(error) { alert('fail');}
+							);
+						}
+					 $scope.diemDanh = function ()
+					 {
+						 
+						 $http({
+								method : "POST",
+								url : "http://localhost:8080/admin/api/follow",
+								data : {
+									'tinhtrang': $scope.add_diemdanh,
+									'ngaytheodoi': new Date(),
+									'hocsinh' : $scope.add_hocsinh
+								},
+
+								dataType : "json"
+							}).then(function (error)
+									{
+								alert('fail');
+									});
+						 
+					 }
 
 				});

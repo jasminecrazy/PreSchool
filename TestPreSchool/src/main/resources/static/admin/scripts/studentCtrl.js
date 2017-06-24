@@ -87,7 +87,9 @@ app
 											diachi :$scope.add_address,
 											ngayvaotruong : $scope.add_ngayvaotruong,
 											tinhtrangsuckhoe : $scope.add_healthStatus,
-											iclass:$scope.add_className
+											iclass:$scope.add_className,
+											hotenph:$scope.parentName,
+											phone:$scope.add_phone
 
 										},
 										dataType : "json"
@@ -140,6 +142,8 @@ app
 											
 											$scope.edit_id = data.id;
 											$scope.edit_studentId=data.studentId;
+											$scope.edit_parentName = response.data.hotenph;
+											$scope.edit_phone = response.data.phone;
 											for (var i = 0; i < $scope.list_class.length; i++) {
 								                if (response.data.iclass.malop == $scope.list_class[i].malop) {
 								                    $scope.edit_className = $scope.list_class[i];
@@ -160,7 +164,9 @@ app
 							diachi : $scope.edit_address,
 							ngayvaotruong : $scope.edit_ngayvaotruong,
 							tinhtrangsuckhoe:$scope.edit_healthStatus,
-							iclass : $scope.edit_className
+							iclass : $scope.edit_className,
+							hotenph:$scope.edit_parentName,
+							phone:$scope.edit_phone
 						}
 						$http({
 							method : "PUT",
@@ -194,7 +200,8 @@ app
 											$scope.chitiet.address = response.data.diachi;
 											$scope.chitiet.ngayvaotruong = new Date (response.data.ngayvaotruong);
 											$scope.chitiet.healthStatus = response.data.tinhtrangsuckhoe;
-											
+											$scope.chitiet.parentName = response.data.hotenph;
+											$scope.chitiet.phone = response.data.phone
 											
 										});
 					}

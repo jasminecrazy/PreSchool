@@ -14,6 +14,7 @@ public interface StudentDao {
 
 	public void updateStudent(Hocsinh Student);
 	public List<Iclass>getAllClass();
+	public List<Hocsinh>getStudentByClassId(int classId);
 
 
 
