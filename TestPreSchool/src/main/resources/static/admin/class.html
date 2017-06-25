@@ -49,12 +49,12 @@
 									<td data-ng-bind="x.namhoc"></td>
 									<td>
 										<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> -->
-										<button class="btn btn-primary btn-sm"
+										<!-- <button class="btn btn-primary btn-sm"
 											ng-click="getStudents(x.id)" data-tooltip="tooltip"
 											title="Detail" data-toggle="modal"
 											data-target="#studentModal">
 											<span class="glyphicon glyphicon-list"></span>
-										</button>
+										</button> -->
 										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
@@ -297,7 +297,8 @@
 					<h4 class="modal-title" id="myModalLabel">List of students</h4>
 					<span ng-model="add_ngaytheodoi">Ngày {{date |
 						date:'dd-MM-yyyy'}}</span>
-					<button class="btn btn-primary btn-sm pull-right">Xem chi
+					<button class="btn btn-primary btn-sm pull-right" ng-click="xemchitiet()"  data-toggle="modal"
+											data-target="#chitiet">Xem chi
 						tiết</button>
 					<input id="timkiem" type="text" placeholder="Tìm kiếm"
 						class="form-control" data-ng-model="search"></input>
@@ -466,13 +467,16 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="addHeath()">Add</button>
+						ng-click="addHeath()">Thêm</button>
 
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 
 				</div>
 
 			</div>
 		</div>
 	</div>
+	<!-- Modal xem chi tiết điểm danh -->
+	
+	<!--  -->
 </div>

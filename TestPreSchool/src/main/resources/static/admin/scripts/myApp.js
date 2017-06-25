@@ -1,4 +1,4 @@
-var app = angular.module('myApp', [ 'ngRoute', 'ui.bootstrap', 'ngResource',
+var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngResource',
 		'ngMessages' ]);
 app.config(function($routeProvider, $locationProvider) {
 	$locationProvider.hashPrefix('');
@@ -26,6 +26,15 @@ app.config(function($routeProvider, $locationProvider) {
 	}).when("/phieusk", {
 		templateUrl : " phieukhamsk.html",
 		controller : "phieukhamskCtrl"	
+	}).when("/diemdanh", {
+		templateUrl : " diemdanh.html",
+		controller : "classCtrl"	
+	}).when("/khamsk", {
+		templateUrl : " khamsk.html",
+		controller : "classCtrl"	
+	}).when("/studentList", {
+		templateUrl : " studentList.html",
+		controller : "studentListCtrl"	
 	
 })
 

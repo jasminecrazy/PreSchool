@@ -25,6 +25,7 @@
 <!-- External Libraries-->
 <link href="css/style.css" rel="stylesheet" />
 <link href="css/sweetalert.css" rel="stylesheet" />
+<link href="css/ui-grid.css" rel="stylesheet" />
 </head>
 
 <body data-ng-app="myApp" class="nav-md">
@@ -52,17 +53,24 @@
 										<li><a href="#/class">Quản lí lớp học</a></li>
 
 										<li><a href="#/cbyt">Quản lí cán bộ y tế</a></li>
-										
+
 
 									</ul></li>
 								<li><a><i class="fa fa-bar-chart-o"></i>Unknow<span
 										class="fa fa-chevron-down"></span></a>
-										<ul class="nav child_menu">
+									<ul class="nav child_menu">
 										<li><a href="#/follow">Theo dõi trẻ</a></li>
 										<li><a href="#/thutien">Thu tiền học</a></li>
 										<li><a href="#/phieusk">Phiếu sức khỏe</a></li>
-										</ul>
-									</li>
+									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Chức năng<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="#/diemdanh">Điểm danh</a></li>
+										<li><a href="#/khamsk">Khám sức khỏe</a></li>
+										<li><a href="#/studentList">Khám sức khỏe</a></li>
+									</ul></li>
+
 							</ul>
 						</div>
 
@@ -144,6 +152,7 @@
 
 	<!-- Angular JS -->
 	<script type="text/javascript" src="../js/angular.min.js"></script>
+
 	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<script type="text/javascript" src="../js/angular-route.min.js"></script>
 	<script type="text/javascript" src="../js/angular-ui.min.js"></script>
@@ -156,11 +165,11 @@
 	<script type="text/javascript" src="scripts/studentCtrl.js"></script>
 	<script type="text/javascript" src="scripts/classCtrl.js"></script>
 	<script type="text/javascript" src="scripts/instructorCtrl.js"></script>
-<script type="text/javascript" src="scripts/followCtrl.js"></script>
+	<script type="text/javascript" src="scripts/followCtrl.js"></script>
 	<script type="text/javascript" src="scripts/cbytCtrl.js"></script>
 	<script type="text/javascript" src="scripts/studentListCtrl.js"></script>
 	<script type="text/javascript" src="scripts/thutienCtrl.js"></script>
 	<script type="text/javascript" src="scripts/phieukhamskCtrl.js"></script>
-
+	
 </body>
 </html>

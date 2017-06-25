@@ -104,15 +104,11 @@
 									<td>
 										
 										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
-											data-tooltip="tooltip" title="Edit" data-toggle="modal"
+											data-tooltip="tooltip" title="Sửa" data-toggle="modal"
 											data-target="#myModal_sua">
 											<span class="glyphicon glyphicon-edit"></span>
 										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
-											data-tooltip="tooltip" title="Delete"
-											data-target="#myModal_xoa" ng-click="xoa(x)">
-											<span class="glyphicon glyphicon-remove"></span>
-										</button>
+										
 									</td>
 								</tr>
 							</tbody>
@@ -160,6 +156,7 @@
 								</div>
 
 							</div>
+							<input type="hidden" ng-model="add_id" />
 							<input type="hidden" ng-model="edit_id" />
 							<!-- Text input-->
 							<div class="form-group">
@@ -267,31 +264,5 @@
 		</div>
 	</div>
 	
-	<!-- Modal xÃ³a -->
-	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">XÃ¡c nháº­n</h4>
-				</div>
-
-				<div class="modal-body">
-
-					<input type="hidden" ng-model="teacher_delete.id" />
-
-					<p>Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a khÃ´ng?</p>
-				</div>
-
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteTeacher()">CÃ³</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">KhÃ´ng</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
+	
 </div>

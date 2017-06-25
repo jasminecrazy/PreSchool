@@ -1,4 +1,4 @@
-app.controller('phieukhamskCtrl', function($scope, $http) {
+app.controller('phieukhamskCtrl', function($scope, $http, $resource) {
 	$scope.list = [];
 	function getAllEmployee() {
 		$http({
@@ -11,6 +11,15 @@ app.controller('phieukhamskCtrl', function($scope, $http) {
 		});
 	}
 	getAllEmployee();
+	function getAllCBYT() {
+		$scope.list_cbyt = [];
+		var Intake = $resource('http://localhost:8080/admin/api/cbyt');
+		Intake.query().$promise.then(function(listcbyt) {
+
+			$scope.list_cbyt = listcbyt;
+		});
+	}
+	getAllCBYT();
 	$scope.sortType = 'sophieukham';
 	$scope.filterTable = ' ';
 	var employeeID = "";
@@ -29,9 +38,15 @@ app.controller('phieukhamskCtrl', function($scope, $http) {
 					$scope.edit_benh = response.data.benh;
 					$scope.edit_ketluan = response.data.ketluan;
 					$scope.edit_id = data.id;
+					$scope.add_id = response.data["hocsinh"].id;
 					$scope.edit_ngaykham = new Date(response.data.ngaykham);
 					
-			console.log(response.data);
+					for (var i = 0; i < $scope.list_cbyt.length; i++) {
+						if (response.data.cbyt.hoTencbyt == $scope.list_cbyt[i].hoTencbyt) {
+							$scope.edit_cbytName = $scope.list_cbyt[i];
+							break;
+						}
+					}
 				});
 
 	}
@@ -40,16 +55,23 @@ app.controller('phieukhamskCtrl', function($scope, $http) {
 
 		var classObj = {
 			id : $scope.edit_id,
-			sophieukham : $scope.edit_classId,
-			tenlop : $scope.edit_className,
-			quantity : $scope.edit_quantity,
+			sophieukham : $scope.edit_sophieukham,
+			lankham : $scope.edit_lankham,
 			namhoc : $scope.edit_namhoc,
-			giaovien : $scope.edit_teacher
+			ngaykham : $scope.edit_ngaykham,
+			chieucao : $scope.edit_chieucao,
+			cannang : $scope.edit_cannang,
+			benh :$scope.edit_benh,
+			ketluan : $scope.edit_ketluan,
+			cbyt : $scope.edit_cbytName,
+			hocsinh : {
+				"id" : $scope.add_id
+			}
 		}
 
 		$http({
 			method : "PUT",
-			url : "http://localhost:8080/admin/api/class",
+			url : "http://localhost:8080/admin/api/healthCheck",
 			data : classObj,
 			contentType : "application/json; charset=utf-8",
 			dataType : "json"
@@ -58,7 +80,7 @@ app.controller('phieukhamskCtrl', function($scope, $http) {
 						function(result) {
 							if (result.status == 202) {
 								$("#myModal_sua").modal("hide");
-								getAllClass();
+								getAllEmployee();
 								editAlert();
 							}
 						},
@@ -66,6 +88,68 @@ app.controller('phieukhamskCtrl', function($scope, $http) {
 							alertFailMessage("Oops! Something went wrong, please check your input again.");
 						});
 
+	}
+	function addAlert() {
+		swal({
+			title : "",
+			text : "Thêm thành công.",
+			type : "success",
+			timer : 2000,
+			showConfirmButton : false
+		});
+	}
+	function diemdanhAlert() {
+		swal({
+			title : "",
+			text : "Đã điểm danh.",
+			type : "success",
+			timer : 2000,
+			showConfirmButton : false
+		});
+	}
+	var alertDuration = 1800;
+	function alertFailMessage(message) {
+		swal({
+			title : "",
+			text : message,
+			type : "error",
+			timer : alertDuration,
+			showConfirmButton : false
+		});
+	}
+	function deleteAlert() {
+		swal({
+			title : "",
+			text : "Xóa thành công.",
+			type : "success",
+			timer : 2000,
+			showConfirmButton : false
+		});
+	}
+	function editAlert() {
+		swal({
+			title : "",
+			text : "Sửa thành công.",
+			type : "success",
+			timer : 2000,
+			showConfirmButton : false
+		});
+	}
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1))
+				+ min;
+	}
+	// Hàm điền tự động
+	$scope.autoAdd = function(keyEvent) {
+		if (keyEvent.keyCode == 81 && keyEvent.altKey) {
+			var random = getRandomInt(1, 10000);
+			$scope.add_classId = "CL" + random;
+			$scope.add_className = "Mai";
+			$scope.add_namhoc = "2014";
+			$scope.add_quantity = 30;
+			$scope.add_teacherName = "Mai";
+
+		}
 	}
 	
 

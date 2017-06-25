@@ -49,4 +49,10 @@ public class TheoDoiServiceImpl implements TheoDoiService{
 		return theodoiDao.getAllStudent();
 	}
 
+	@Transactional
+	public List<Hocsinh> getStudentt() {
+	
+		return theodoiDao.getStudentt();
+	}
+
 }

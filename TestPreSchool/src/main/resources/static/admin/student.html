@@ -86,7 +86,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr
+								<tr data-ng-show="showList(x,$index)"
 									data-ng-repeat="x in list |  orderBy:sortType:sortReverse| filter : filterTable"">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>

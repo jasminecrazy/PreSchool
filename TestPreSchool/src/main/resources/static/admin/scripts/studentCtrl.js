@@ -28,11 +28,13 @@ app
 						$scope.itemsPerPage = index;
 						$scope.updatePageIndexes();
 					}
+					 $scope.sortType = 'studentName';
+					 $scope.filterTable =' ';
 					// Phân trang
 			    	$scope.currentPage = 1;
 			    	// max size of the pagination bar
 			    	$scope.maxPaginationSize = 10;
-			    	  $scope.itemsPerPage = $scope.rowdata.selectedOption.id;
+			    	  $scope.itemsPerPage = 15;
 			    	$scope.updatePageIndexes = function () {
 			    		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
 			    		if (totalPages <= 10) {
@@ -70,8 +72,7 @@ app
 					        });
 					}
 					getAllClass();
-					 $scope.sortType = 'studentName';
-					 $scope.filterTable =' ';
+					
 					// add Student
 					$scope.them = function(close) {
 						

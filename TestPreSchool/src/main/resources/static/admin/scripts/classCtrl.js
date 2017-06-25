@@ -2,6 +2,8 @@ app
 		.controller(
 				'classCtrl',
 				function($scope, $http, $resource) {
+					 $scope.disabled = false;
+					 
 					$scope.list = [];
 					function getAllClass() {
 						$http({
@@ -13,6 +15,22 @@ app
 							console.log(error);
 						});
 					}
+					function getAllTheodoi() {
+						$scope.list_ngaytheodoi = [];
+						var Intake = $resource('http://localhost:8080/admin/api/follow');
+						Intake.query().$promise.then(function(listteacher) {
+
+							$scope.list_ngaytheodoi = listteacher;
+						});
+					}
+					 $scope.open2 = function() {
+						    $scope.popup2.opened = true;
+						  };
+						  $scope.popup2 = {
+								    opened: false
+								  };
+
+					getAllTheodoi();
 					getAllClass();
 					function getAllTeacher() {
 						$scope.list_teacher = [];
@@ -265,8 +283,6 @@ app
 												array[i] = false;
 
 											}
-										}, function(error) {
-											alert('fail');
 										});
 					}
 					$scope.change = function(id) {
