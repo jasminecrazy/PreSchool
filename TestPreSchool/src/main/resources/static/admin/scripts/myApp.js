@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngResource',
+var app = angular.module('myApp', ['ng-fusioncharts','ngRoute', 'ui.bootstrap', 'ngResource',
 		'ngMessages' ]);
 app.config(function($routeProvider, $locationProvider) {
 	$locationProvider.hashPrefix('');

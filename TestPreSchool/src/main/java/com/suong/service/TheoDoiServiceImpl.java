@@ -50,7 +50,7 @@ public class TheoDoiServiceImpl implements TheoDoiService{
 	}
 
 	@Transactional
-	public List<Hocsinh> getStudentt() {
+	public List<Nktheodoi> getStudentt() {
 	
 		return theodoiDao.getStudentt();
 	}

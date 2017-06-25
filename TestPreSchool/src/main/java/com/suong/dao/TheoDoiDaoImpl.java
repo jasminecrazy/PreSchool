@@ -48,9 +48,9 @@ private SessionFactory session;
 		return session.getCurrentSession().createQuery("from Hocsinh").list();
 	}
 	@SuppressWarnings("unchecked")
-	public List<Hocsinh> getStudentt() {
+	public List<Nktheodoi> getStudentt() {
 		
-		return session.getCurrentSession().createQuery("from Hocsinh group by ngaytheodoi ").list();
+		return session.getCurrentSession().createQuery("from Nktheodoi n group by ngaytheodoi").list();
 	}
 
 }
