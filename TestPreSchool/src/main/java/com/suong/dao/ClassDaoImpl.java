@@ -55,4 +55,13 @@ public class ClassDaoImpl implements ClassDao {
 				.setInteger("id", id).list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Hocsinh> getIStudent(int id) {
+		return sesion.getCurrentSession()
+				.createQuery(
+						"from Hocsinh s where s.iclass.id = :id")
+				.setInteger("id", id).list();
+	}
+
 }

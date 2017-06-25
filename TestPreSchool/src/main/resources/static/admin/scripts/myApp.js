@@ -23,9 +23,9 @@ app.config(function($routeProvider, $locationProvider) {
 	}).when("/thutien", {
 		templateUrl : " thutien.html",
 		controller : "thutienCtrl"	
-	}).when("/studentList", {
-		templateUrl : " studentList.html",
-		controller : "studentListCtrl"	
+	}).when("/phieusk", {
+		templateUrl : " phieukhamsk.html",
+		controller : "phieukhamskCtrl"	
 	
 })
 

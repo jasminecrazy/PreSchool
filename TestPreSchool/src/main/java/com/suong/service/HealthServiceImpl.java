@@ -54,4 +54,10 @@ public class HealthServiceImpl implements HealthService{
 		return healthDao.getAllStudent();
 	}
 
+	@Transactional
+	public List<Hocsinh> getStudent(int id) {
+	
+		return healthDao.getStudent(id);
+	}
+
 }

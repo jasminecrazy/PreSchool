@@ -1,274 +1,33 @@
+<div class="right_col" role="main">
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h3>Student management</h3>
+			</div>
 
-<div class="">
-	<div class="page-title">
-		<div class="title_left">
-			<h3>Danh sách lớp </h3>
+			<div class="title_right">
+				<div class="form-group pull-right top_search">
+					<button data-toggle="modal" data-target="#myModal_them"
+						type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Add</button>
+				</div>
+			</div>
 		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<div class="table-responsive">
+							<div id="grid" ui-grid="gridOptions"
+								ui-grid-selection="ui-grid-selection"
+								ui-grid-resize-columns="ui-grid-resize-columns"
+								ui-grid-pagination="ui-grid-pagination" class="grid"></div>
 
-		
-	</div>
-	<div class="clearfix"></div>
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="x_panel">
-				<div class="x_title">
-					<div class="clearfix"></div>
-				</div>
-				<div class="col-md-6 pull-right">
-					<input id="filter" type="text" placeholder="Filter"
-						class="form-control" data-ng-model="filterTable"></input>
-				</div>
 
-				<div class="x_content">
-
-					<div class="table-responsive">
-						<table class="table table-condensed table-hover">
-							<thead>
-								<tr>
-									<th style="width: 3%">&#35;</th>
-									<th class="sortable" style="width: 5%">Mã trẻ</th>
-									<th class="sortable" style="width: 7%">Họ tên trẻ</th>
-									
-									<th style="width: 10%">Action</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr data-ng-repeat="x in listStudent">
-									<td ng-bind="$index+1"></td>
-									<td data-ng-bind="x[0]"></td>
-									<td data-ng-bind="x[1]"></td>
-									
-									<td>
-										<a class="btn btn-primary btn-sm" href="#/diemdanh"><span class="glyphicon glyphicon-th-list"></span></a>
-										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
-											data-tooltip="tooltip" title="Thu học phi" data-toggle="modal"
-											data-target="#myModal_sua">
-											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
-											data-tooltip="tooltip" title="Delete"
-											data-target="#myModal_xoa" ng-click="xoa(x)">
-											<span class="glyphicon glyphicon-remove"></span>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-
-					</div>
-					<div class='pull-right'>
-						<uib-pagination
-							data-total-items="(list | filter:filterTable).length"
-							data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
-							data-max-size="maxPaginationSize"
-							data-items-per-page="itemsPerPage" data-boundary-links="true"
-							data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
-							data-first-text="&laquo;" data-last-text="&raquo;">
-						</uib-pagination>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Modal thÃªm -->
-	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">ThÃªm thÃ´ng tin lá»›p</h4>
-				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal" name="frmStudentAdd"
-						enctype="multipart/form-data" id="fileUploadForm">
-						<div class="col-md-6">
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="">MÃ£ lá»›p</label>
-								<div class="">
-									<input id="classId" name="classId"
-										ng-keyup="hideDuplicateAlert()" ng-keydown="autoAdd($event)"
-										class="form-control input-md" type="text"
-										ng-model="add_classId" ng-required="false" />
-								</div>
-
-							</div>
-							<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-								style="color: red"></p>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="">TÃªn Lá»›p</label>
-								<div class="">
-									<input id="className" name="className"
-										class="form-control input-md" type="text"
-										ng-model="add_className" ng-required="false" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label">Sá»‰ sá»‘</label>
-								<div class="">
-									<input id="quantity" name="quantity" ng-model="add_quantity"
-										class="form-control input-md" type="number" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label">NÄƒm há»�c</label>
-								<div class="">
-									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
-										class="form-control input-md" type="text" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">GiÃ¡o viÃªn
-									chá»§ nhiá»‡m</label>
-								<div class="">
-									<select ng-selected="student.teacher"
-										ng-model="add_teacherName" class="form-control"
-										ng-options="x.teacherName for x in list_teacher"
-										name="teacherName" id="teacherName" ng-required="true">
-									</select>
-								</div>
-							</div>
-
-
-						</div>
-
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="them(false)">Add</button>
-					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="them(true)">Add and close</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- Modal Sá»­a -->
-	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Sá»­a thÃ´ng tin lá»›p</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" name="frmClass">
-						<input type="hidden" name="id" ng-model="class_edit.id" />
-
-
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="classID"> ID</label>
-							<div class="col-md-8">
-								<input id="classId" name="classId" placeholder=""
-									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
-									type="text" ng-model="edit_classId" ng-required="true" /> <span
-									id="helpBlock" style="color: red" class="help-block"
-									ng-show="frmClass.classId.$error.required">TrÆ°á»�ng báº¯t
-									buá»™c</span>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-									style="color: red"></p>
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-3 control-label"> Name</label>
-							<div class="col-md-8">
-								<input id="className" name="className"
-									class="form-control input-md" type="text"
-									ng-model="edit_className" ng-required="true" /> <span
-									id="helpBlock" class="help-block" style="color: red"
-									ng-show="frmClass.className.$error.required">This field
-									is required</span>
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-3 control-label">Sá»‰ sá»‘</label>
-							<div class="col-md-8">
-								<input id="quantity" name="quantity" placeholder=""
-									class="form-control input-md" type="number" ng-required="true"
-									ng-model="edit_quantity" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmClass.quantity.$error.required">This field
-									is required</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">NÄƒm há»�c</label>
-							<div class="col-md-8">
-								<input id="namhoc" name="namhoc" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="edit_namhoc" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="selectbasic">GiÃ¡o
-								viÃªn chá»§ nhiá»‡m</label>
-							<div class="col-md-8">
-								<select ng-selected="student.teacher" ng-model="edit_teacher"
-									class="form-control"
-									ng-options="x.teacherName for x in list_teacher"
-									name="teacherName" id="teacherName" ng-required="true">
-								</select>
-							</div>
-						</div>
-
-
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" ng-click="update()"
-						ng-disabled="frmClass.classId.$error.required || frmClass.className.$error.required || frmClass.quantity.$error.required">Save</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<!-- Modal xÃ³a -->
-	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">XÃ¡c nháº­n</h4>
-				</div>
-
-				<div class="modal-body">
-
-					<input type="hidden" ng-model="class_delete.id" />
-
-					<p>Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a khÃ´ng?</p>
-				</div>
-
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteClass()">CÃ³</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">KhÃ´ng</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--  -->
 </div>

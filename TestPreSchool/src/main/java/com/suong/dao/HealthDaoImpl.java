@@ -55,4 +55,14 @@ public class HealthDaoImpl implements HealthDao{
 		return sesion.getCurrentSession().createQuery("from Hocsinh").list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Hocsinh> getStudent(int id) {
+		
+		return sesion.getCurrentSession()
+				.createQuery(
+						"from Khamsuckhoe s where s.hocsinh.id = :id ")
+				.setInteger("id", id).list();
+	}
+
 }

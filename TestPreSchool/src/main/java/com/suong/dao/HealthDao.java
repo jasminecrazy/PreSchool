@@ -19,4 +19,5 @@ public interface HealthDao {
 	public void updateHealth(Khamsuckhoe health);
 	public List<Cbyt>getAllCBYT();
 	public List<Hocsinh>getAllStudent();
+	public List<Hocsinh>getStudent(int id);
 }

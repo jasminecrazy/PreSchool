@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ public class Khamsuckhoe implements java.io.Serializable {
 	private Hocsinh hocsinh;
 	private String sophieukham;
 	private int lankham;
-	private Date namhoc;
+	private String namhoc;
 	private Date ngaykham;
 	private String chieucao;
 	private String cannang;
@@ -39,20 +39,19 @@ public class Khamsuckhoe implements java.io.Serializable {
 	public Khamsuckhoe() {
 	}
 
-	public Khamsuckhoe(Cbyt cbyt, Hocsinh hocsinh, String sophieukham, int lankham, Date namhoc, Date ngaykham,
-			String chieucao, String cannang, String ketluan) {
+	public Khamsuckhoe(Cbyt cbyt, Hocsinh hocsinh, String sophieukham, int lankham, Date ngaykham, String chieucao,
+			String cannang, String ketluan) {
 		this.cbyt = cbyt;
 		this.hocsinh = hocsinh;
 		this.sophieukham = sophieukham;
 		this.lankham = lankham;
-		this.namhoc = namhoc;
 		this.ngaykham = ngaykham;
 		this.chieucao = chieucao;
 		this.cannang = cannang;
 		this.ketluan = ketluan;
 	}
 
-	public Khamsuckhoe(Cbyt cbyt, Hocsinh hocsinh, String sophieukham, int lankham, Date namhoc, Date ngaykham,
+	public Khamsuckhoe(Cbyt cbyt, Hocsinh hocsinh, String sophieukham, int lankham, String namhoc, Date ngaykham,
 			String chieucao, String cannang, String benh, String ketluan) {
 		this.cbyt = cbyt;
 		this.hocsinh = hocsinh;
@@ -116,13 +115,12 @@ public class Khamsuckhoe implements java.io.Serializable {
 		this.lankham = lankham;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "namhoc", nullable = false, length = 0)
-	public Date getNamhoc() {
+	@Column(name = "namhoc", length = 100)
+	public String getNamhoc() {
 		return this.namhoc;
 	}
 
-	public void setNamhoc(Date namhoc) {
+	public void setNamhoc(String namhoc) {
 		this.namhoc = namhoc;
 	}
 

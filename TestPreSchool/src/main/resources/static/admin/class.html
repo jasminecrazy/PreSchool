@@ -48,10 +48,11 @@
 									<td data-ng-bind="x.quantity"></td>
 									<td data-ng-bind="x.namhoc"></td>
 									<td>
-									<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> --> 
-										   <button class="btn btn-primary btn-sm" ng-click="getStudents(x.id)"
-											data-tooltip="tooltip" title="Detail" data-toggle="modal" data-target="#studentModal"
-											>
+										<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> -->
+										<button class="btn btn-primary btn-sm"
+											ng-click="getStudents(x.id)" data-tooltip="tooltip"
+											title="Detail" data-toggle="modal"
+											data-target="#studentModal">
 											<span class="glyphicon glyphicon-list"></span>
 										</button>
 										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
@@ -294,8 +295,10 @@
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">List of students</h4>
-					<span ng-model="add_ngaytheodoi">Ngày {{date | date:'dd-MM-yyyy'}}</span>
-					<button class="btn btn-primary btn-sm pull-right">Xem chi tiết</button>
+					<span ng-model="add_ngaytheodoi">Ngày {{date |
+						date:'dd-MM-yyyy'}}</span>
+					<button class="btn btn-primary btn-sm pull-right">Xem chi
+						tiết</button>
 					<input id="timkiem" type="text" placeholder="Tìm kiếm"
 						class="form-control" data-ng-model="search"></input>
 				</div>
@@ -313,18 +316,24 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat="x in listStudent | filter: search">
-									<td  ng-bind="$index +1"></td>
-									<td  ng-bind="x[1]"></td>
-									<td  ng-bind="x[2]"></td>
-									<td  ng-model="add_hocsinh" ng-bind="x[0]"></td>
-									<td>
-									Có mặt <input type="checkbox" value="0" ng-model="add_diemdanh"/>
-									
+									<td ng-bind="$index +1"></td>
+									<td ng-bind="x[1]"></td>
+									<td ng-bind="x[2]"></td>
+
+									<td>Có mặt <input type="checkbox" value="true"
+										ng-model="trangthai" ng-click="change($index)" />
+
 									</td>
 									<td>
-									<button class="btn btn-sm btn-success"><a href="#/"><span class="glyphicon glyphicon-usd"></span></a></button>
+										<button class="btn btn-sm btn-success">
+											<span class="glyphicon glyphicon-usd"></span>
+										</button>
+										<button class="btn btn-sm btn-default" ng-click="khamsk(x[0])"
+											data-toggle="modal" data-target="#SuckhoeModal">
+											<span class="glyphicon glyphicon-header"></span>
+										</button>
 									</td>
-									
+
 								</tr>
 
 							</tbody>
@@ -333,10 +342,136 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="diemDanh()" >Điểm danh</button>
+					<button class="btn btn-primary" ng-click="diemDanh()">Điểm
+						danh</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					
+
 				</div>
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	<!-- Modal kham suc khoe -->
+	<!-- Modal thêm -->
+	<div class="modal fade" id="SuckhoeModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Phiếu khám sức khỏe</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmHealthForm"
+						enctype="multipart/form-data" id="fileUploadForm">
+						<div class="col-md-6">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Mã phiếu khám</label>
+								<div class="">
+									<input id="sophieukham" name="sophieukham"
+										class="form-control input-md" type="text"
+										ng-model="add_sophieukham" />
+								</div>
+
+							</div>
+							<input type="hidden" ng-model="add_id" />
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Mã trẻ</label>
+								<div class="">
+									<input id="studentId" name="studentId"
+										class="form-control input-md" type="text"
+										ng-model="add_studentId" readonly="readonly" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label">Tên trẻ</label>
+								<div class="">
+									<input id="studentName" name="studentName"
+										ng-model="add_studentName" class="form-control input-md"
+										type="text" readonly="readonly" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label">Lần khám</label>
+								<div class="">
+									<input id="lankham" name="lankham" ng-model="add_lankham"
+										class="form-control input-md" type="number" min="0" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Năm học </label>
+								<div class="">
+									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
+										class="form-control input-md" type="text" />
+
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-md-6">
+						<div class="form-group">
+								<label class="control-label" for="selectbasic">Ngày khám</label>
+								<div class="">
+									<input id="ngaykham" name="ngaykham" ng-model="add_ngaykham"
+										class="form-control input-md" type="date" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Chiều cao</label>
+								<div class="">
+									<input id="chieucao" name="chieucao" ng-model="add_chieucao"
+										class="form-control input-md" type="number" min="0" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Cân nặng</label>
+								<div class="">
+									<input id="cannang" name="cangnang" ng-model="add_cannang"
+										class="form-control input-md" type="number" min="0" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Cán bộ y
+									tế</label>
+								<div class="">
+									<select ng-selected="student.teacher" ng-model="add_cbytName"
+										class="form-control"
+										ng-options="x.hoTencbyt for x in list_cbyt" name="cbytName"
+										id="cbytName" ng-required="true">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Kết luận</label>
+								<div class="">
+									<textarea id="ketluan" name="ketluan" ng-model="add_ketluan"
+										class="form-control" row="3" cols="3"></textarea>
+
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="addHeath()">Add</button>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+
 			</div>
 		</div>
 	</div>

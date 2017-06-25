@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +33,7 @@ public class Iclass implements java.io.Serializable {
 	private String tenlop;
 	private String namhoc;
 	private int quantity;
+	private Boolean status;
 	private Set<Hocsinh> hocsinhs = new HashSet<Hocsinh>(0);
 
 	public Iclass() {
@@ -46,12 +47,14 @@ public class Iclass implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	public Iclass(Giaovien giaovien, String malop, String tenlop, String namhoc, int quantity, Set<Hocsinh> hocsinhs) {
+	public Iclass(Giaovien giaovien, String malop, String tenlop, String namhoc, int quantity, Boolean status,
+			Set<Hocsinh> hocsinhs) {
 		this.giaovien = giaovien;
 		this.malop = malop;
 		this.tenlop = tenlop;
 		this.namhoc = namhoc;
 		this.quantity = quantity;
+		this.status = status;
 		this.hocsinhs = hocsinhs;
 	}
 
@@ -111,6 +114,15 @@ public class Iclass implements java.io.Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	@Column(name = "status")
+	public Boolean getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iclass")

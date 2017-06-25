@@ -18,4 +18,5 @@ public interface ClassDao {
 	public void updateIClass(Iclass iclass);
 	public List<Giaovien>getAllTeacher();
 	public List<Hocsinh>getStudent(int id);
+	public List<Hocsinh>getIStudent(int id);
 }

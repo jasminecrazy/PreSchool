@@ -19,7 +19,7 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-6 pull-right">
-					<input id="filter" type="text" placeholder="Filter"
+					<input id="filter" type="text" placeholder="Tìm kiếm"
 						class="form-control" data-ng-model="filterTable"></input>
 				</div>
 
@@ -85,7 +85,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
+								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter: filterTable">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.macbyt"></td>

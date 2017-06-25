@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;

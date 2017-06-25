@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 24, 2017 10:08:12 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,12 +34,13 @@ public class Hocsinh implements java.io.Serializable {
 	private String studentId;
 	private String studentName;
 	private Date ngaysinh;
-	private Boolean gioitinh;
+	private byte gioitinh;
 	private String diachi;
 	private Date ngayvaotruong;
 	private String tinhtrangsuckhoe;
 	private String hotenph;
 	private String phone;
+	private Boolean status;
 	private Set<Nktheodoi> nktheodois = new HashSet<Nktheodoi>(0);
 	private Set<Khamsuckhoe> khamsuckhoes = new HashSet<Khamsuckhoe>(0);
 	private Set<Thutienhoc> thutienhocs = new HashSet<Thutienhoc>(0);
@@ -53,9 +54,9 @@ public class Hocsinh implements java.io.Serializable {
 		this.studentName = studentName;
 	}
 
-	public Hocsinh(Iclass iclass, String studentId, String studentName, Date ngaysinh, Boolean gioitinh, String diachi,
-			Date ngayvaotruong, String tinhtrangsuckhoe, String hotenph, String phone, Set<Nktheodoi> nktheodois,
-			Set<Khamsuckhoe> khamsuckhoes, Set<Thutienhoc> thutienhocs) {
+	public Hocsinh(Iclass iclass, String studentId, String studentName, Date ngaysinh, byte gioitinh, String diachi,
+			Date ngayvaotruong, String tinhtrangsuckhoe, String hotenph, String phone, Boolean status,
+			Set<Nktheodoi> nktheodois, Set<Khamsuckhoe> khamsuckhoes, Set<Thutienhoc> thutienhocs) {
 		this.iclass = iclass;
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -66,6 +67,7 @@ public class Hocsinh implements java.io.Serializable {
 		this.tinhtrangsuckhoe = tinhtrangsuckhoe;
 		this.hotenph = hotenph;
 		this.phone = phone;
+		this.status = status;
 		this.nktheodois = nktheodois;
 		this.khamsuckhoes = khamsuckhoes;
 		this.thutienhocs = thutienhocs;
@@ -122,11 +124,11 @@ public class Hocsinh implements java.io.Serializable {
 	}
 
 	@Column(name = "gioitinh")
-	public Boolean getGioitinh() {
+	public byte getGioitinh() {
 		return this.gioitinh;
 	}
 
-	public void setGioitinh(Boolean gioitinh) {
+	public void setGioitinh(byte gioitinh) {
 		this.gioitinh = gioitinh;
 	}
 
@@ -175,6 +177,15 @@ public class Hocsinh implements java.io.Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	@Column(name = "status")
+	public Boolean getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hocsinh")
 	public Set<Nktheodoi> getNktheodois() {
@@ -193,6 +204,7 @@ public class Hocsinh implements java.io.Serializable {
 	public void setKhamsuckhoes(Set<Khamsuckhoe> khamsuckhoes) {
 		this.khamsuckhoes = khamsuckhoes;
 	}
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hocsinh")
 	public Set<Thutienhoc> getThutienhocs() {

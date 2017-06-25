@@ -75,5 +75,9 @@ public class ClassController {
 	public ResponseEntity<List<Hocsinh>> getStudents(@PathVariable int id) {
 		return new ResponseEntity<>(classService.getStudent(id), HttpStatus.OK);
 	}
-	
+
+	@RequestMapping(value = "admin/api/class/students/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Hocsinh>> getIStudents(@PathVariable int id) {
+		return new ResponseEntity<>(classService.getIStudent(id), HttpStatus.OK);
+	}
 }

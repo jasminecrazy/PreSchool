@@ -54,4 +54,9 @@ public class ClassServiceImpl implements ClassService{
 				return classDao.getStudent(id);
 	}
 
+	@Transactional
+	public List<Hocsinh> getIStudent(int id) {
+		return classDao.getIStudent(id);
+	}
+
 }

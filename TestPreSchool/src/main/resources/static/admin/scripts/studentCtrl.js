@@ -1,8 +1,9 @@
 app
 		.controller(
 				'studentCtrl',
-				function($scope, $http, $resource) {
+				function($scope, $http, $filter, $resource) {
 					$scope.list = [];
+					$scope.date = new Date();
 					function getAllStudent() {
 						$http({
 							url : 'http://localhost:8080/admin/api/Student',
@@ -31,7 +32,7 @@ app
 			    	$scope.currentPage = 1;
 			    	// max size of the pagination bar
 			    	$scope.maxPaginationSize = 10;
-			    	$scope.itemsPerPage = 15;
+			    	  $scope.itemsPerPage = $scope.rowdata.selectedOption.id;
 			    	$scope.updatePageIndexes = function () {
 			    		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
 			    		if (totalPages <= 10) {

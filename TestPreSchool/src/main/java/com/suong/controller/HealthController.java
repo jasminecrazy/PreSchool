@@ -77,4 +77,8 @@ public class HealthController {
 	public ResponseEntity<List<Cbyt>> getAllCBYTHealth() {
 		return new ResponseEntity<>(healthService.getAllCBYT(), HttpStatus.OK);
 	}
+	@RequestMapping(value = "admin/api/healthCheck/getStudent/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Hocsinh>> getStudentss(@PathVariable int id) {
+		return new ResponseEntity<>(healthService.getStudent(id), HttpStatus.OK);
+	}
 }
