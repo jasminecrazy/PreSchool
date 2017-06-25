@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ng-fusioncharts','ngRoute', 'ui.bootstrap', 'ngResource',
+var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngResource',
 		'ngMessages' ]);
 app.config(function($routeProvider, $locationProvider) {
 	$locationProvider.hashPrefix('');
@@ -36,6 +36,10 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl : " studentList.html",
 		controller : "studentListCtrl"	
 	
-})
+	}).when("/", {
+		templateUrl : " dashboard.html",
+		controller : "dashboardCtrl"	
+	
+	})
 
 	});
