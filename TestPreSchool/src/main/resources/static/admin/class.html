@@ -130,28 +130,30 @@
 
 								</div>
 							</div>
-							<div class="form-group">
-								<label class=" control-label">Năm học</label>
-								<div class="">
-									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
-										class="form-control input-md" type="text" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">Giáo viên
-									chủ nhiệm</label>
-								<div class="">
-									<select ng-selected="student.teacher"
-										ng-model="add_teacherName" class="form-control"
-										ng-options="x.teacherName for x in list_teacher"
-										name="teacherName" id="teacherName" ng-required="true">
-									</select>
-								</div>
-							</div>
-
-
+							
 						</div>
+						<div class="col-md-6">
+								<div class="form-group">
+									<label class=" control-label">Năm học</label>
+									<div class="">
+										<input id="namhoc" name="namhoc" ng-model="add_namhoc"
+											class="form-control input-md" type="text" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="selectbasic">Giáo viên
+										chủ nhiệm</label>
+									<div class="">
+										<select ng-selected="student.teacher"
+											ng-model="add_teacherName" class="form-control"
+											ng-options="x.teacherName for x in list_teacher"
+											name="teacherName" id="teacherName" ng-required="true">
+										</select>
+									</div>
+								</div>
+							</div>
+
 
 					</form>
 				</div>

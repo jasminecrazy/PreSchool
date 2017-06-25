@@ -36,6 +36,10 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl : " studentList.html",
 		controller : "studentListCtrl"	
 	
-})
+	}).when("/", {
+		templateUrl : " dashboard.html",
+		controller : "dashboardCtrl"	
+	
+	})
 
 	});

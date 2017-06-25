@@ -1,0 +1,197 @@
+
+<div class="">
+	<div class="page-title">
+		<div class="title_left">
+			<h3>Điểm danh</h3>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<div class="clearfix"></div>
+				</div>
+				<div class="col-md-6 pull-right">
+					<input id="filter" type="text" placeholder="Filter"
+						class="form-control" data-ng-model="filterTable"></input>
+				</div>
+
+				<div class="x_content">
+
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th style="width: 3%">&#35;</th>
+									<th class="sortable" style="width: 5%">Mã lớp</th>
+									<th class="sortable" style="width: 7%">Tên lớp</th>
+									<th class="sortable" style="width: 7%">Sỉ số</th>
+									<th class="sortable" style="width: 7%">Năm học</th>
+									<th style="width: 10%">Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="x in list">
+									<td ng-bind="$index+1"><input type="hidden"
+										ng-model="x.id" /></td>
+									<td data-ng-bind="x.malop"></td>
+									<td data-ng-bind="x.tenlop"></td>
+									<td data-ng-bind="x.quantity"></td>
+									<td data-ng-bind="x.namhoc"></td>
+									<td>
+										<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> -->
+										<button class="btn btn-primary btn-sm"
+											ng-click="getStudents(x.id)" data-tooltip="tooltip"
+											title="Detail" data-toggle="modal"
+											data-target="#studentModal">
+											<span class="glyphicon glyphicon-list"></span>
+										</button> <!-- <button class="btn btn-primary btn-sm" ng-click="sua(x)"
+											data-tooltip="tooltip" title="Edit" data-toggle="modal"
+											data-target="#myModal_sua">
+											<span class="glyphicon glyphicon-edit"></span>
+										</button>
+										<button data-toggle="modal" class="btn btn-danger btn-sm"
+											data-tooltip="tooltip" title="Delete"
+											data-target="#myModal_xoa" ng-click="xoa(x)">
+											<span class="glyphicon glyphicon-remove"></span>
+										</button> -->
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<div class='pull-right'>
+						<uib-pagination
+							data-total-items="(list | filter:filterTable).length"
+							data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+							data-max-size="maxPaginationSize"
+							data-items-per-page="itemsPerPage" data-boundary-links="true"
+							data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
+							data-first-text="&laquo;" data-last-text="&raquo;">
+						</uib-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- <select ng-selected="ngaytheodoi"
+						ng-model="ct_ngaytheodoi" class="col-md-5 form-control"
+						ng-options="x.ngaytheodoi for x in list_ngaytheodoi"
+						name="ngaytheodoi" id="ngaytheodoi" ng-required="true">
+					</select>*/
+	 -->
+	 <!-- Modal student -->
+	<div class="modal fade" id="studentModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Danh sách trẻ</h4>
+					<span ng-model="add_ngaytheodoi">Ngày {{date |
+						date:'dd-MM-yyyy'}}</span> 
+					<button class="btn btn-primary pull-right " ng-click="getStudents(x.id)" data-toggle="modal"
+											data-target="#Modalchitiet" >Chi tiết</button>	
+					
+					<input id="timkiem" type="text" placeholder="Tìm kiếm"
+						class="form-control" data-ng-model="search"></input>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Mã trẻ</th>
+									<th>Họ tên</th>
+									<th>Trạng thái</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in listStudent | filter: search">
+									<td ng-bind="$index +1"></td>
+									<td ng-bind="x[1]"></td>
+									<td ng-bind="x[2]"></td>
+
+									<td>Có mặt <input type="checkbox" value="true"
+										ng-checked="!disabled" ng-model="trangthai"
+										ng-click="change($index)" />
+
+									</td>
+
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="diemDanh()">Điểm
+						danh</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  -->
+<div class="modal fade" id="Modalchitiet" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Danh sách trẻ</h4>
+					 <select ng-selected="ngaytheodoi"
+						ng-model="ct_ngaytheodoi" class="col-md-3"
+						ng-options="x.ngaytheodoi for x in list_ngaytheodoi"
+						name="ngaytheodoi" id="ngaytheodoi" ng-required="true" value="{{x.ngaytheodoi}}">
+					</select>
+					<input id="timkiem" type="text" placeholder="Tìm kiếm"
+						class="form-control" data-ng-model="search"></input>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Mã trẻ</th>
+									<th>Họ tên</th>
+									
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in listStudent | filter: search">
+									<td ng-bind="$index +1"></td>
+									<td ng-bind="x[1]" ></td>
+									<td ng-bind="x[2]"></td>
+
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  -->
+</div>
