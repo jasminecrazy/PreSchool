@@ -13,10 +13,56 @@ app
 							console.log(error);
 						});
 					}
+					
 					getAllTeacher();
 					 $scope.sortType = 'teacherName';
 					 $scope.filterTable =' ';
+					 $scope.rowdata = {
+						     availableOptions: [
+						    	 {id: '15', name: '15'},
+							       {id: '30', name: '30'},
+							       {id: '50', name: '50'},
+							       {id: '100', name: '100'}
+						     ],
+						     selectedOption: {id: '15', name: '15 rows'}
+						    };
+					$scope.ChangeRow=function(index){
+						$scope.itemsPerPage = index;
+						$scope.updatePageIndexes();
+					}
 					
+					// Phân trang
+			    	$scope.currentPage = 1;
+			    	// max size of the pagination bar
+			    	$scope.maxPaginationSize = 10;
+			    	  $scope.itemsPerPage = 15;
+			    	$scope.updatePageIndexes = function () {
+			    		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+			    		if (totalPages <= 10) {
+			                // less than 10 total pages so show all
+			    			$scope.firstIndex = 1;
+			    			$scope.lastIndex = totalPages;
+			            } else {
+			                // more than 10 total pages so calculate start and end pages
+			                if ($scope.currentPage <= 6) {
+			                	$scope.firstIndex = 1;
+			                	$scope.lastIndex = 10;
+			                } else if ($scope.currentPage + 4 >= totalPages) {
+			                	$scope.firstIndex = totalPages - 9;
+			                	$scope.lastIndex = totalPages;
+			                } else {
+			                	$scope.firstIndex = $scope.currentPage - 5;
+			                	$scope.lastIndex = $scope.currentPage + 4;
+			                }
+			            }
+			    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+			    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+			    	};
+			    	$scope.updatePageIndexes();
+			    	
+			    	$scope.showList=function(school,index){
+			    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+			    	}
 					// Thông tin chi tiết
 						var teacherID = ""
 						$scope.chitiet = function(data) {

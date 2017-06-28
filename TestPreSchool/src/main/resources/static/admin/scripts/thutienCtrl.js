@@ -3,7 +3,7 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 	$scope.list = [];
 	function getAllTien() {
 		$http({
-			url : 'http://localhost:8080/admin/api/thutien',
+			url : 'http://localhost:8080/admin/api/Student',
 			method : "GET"
 		}).then(function(response) {
 			$scope.list = response.data;
@@ -12,7 +12,62 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 		});
 	}
 	getAllTien();
+	$scope.rowdata = {
+		     availableOptions: [
+		    	 {id: '15', name: '15'},
+			       {id: '30', name: '30'},
+			       {id: '50', name: '50'},
+			       {id: '100', name: '100'}
+		     ],
+		     selectedOption: {id: '15', name: '15 rows'}
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
+	 $scope.sortType = 'studentName';
+	 $scope.filterTable =' ';
+	// Phân trang
+	$scope.currentPage = 1;
+	// max size of the pagination bar
+	$scope.maxPaginationSize = 10;
+	  $scope.itemsPerPage = 15;
+	$scope.updatePageIndexes = function () {
+		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+		if (totalPages <= 10) {
+           // less than 10 total pages so show all
+			$scope.firstIndex = 1;
+			$scope.lastIndex = totalPages;
+       } else {
+           // more than 10 total pages so calculate start and end pages
+           if ($scope.currentPage <= 6) {
+           	$scope.firstIndex = 1;
+           	$scope.lastIndex = 10;
+           } else if ($scope.currentPage + 4 >= totalPages) {
+           	$scope.firstIndex = totalPages - 9;
+           	$scope.lastIndex = totalPages;
+           } else {
+           	$scope.firstIndex = $scope.currentPage - 5;
+           	$scope.lastIndex = $scope.currentPage + 4;
+           }
+       }
+		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+	};
+	$scope.updatePageIndexes();
+	
+	$scope.showList=function(school,index){
+		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+	}
+	function getAllClass() {
+		 $scope.list_class = [];
+	        var Intake = $resource('http://localhost:8080/admin/api/studentcl');
+	        Intake.query().$promise.then(function(listclass) {
 
+	            $scope.list_class= listclass;
+	            console.log($scope.list_class);
+	        });
+	}
 	// Get list class
 	function getAllClass() {
 		$scope.list_class = [];
@@ -47,15 +102,26 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 		$scope.add_mabienlai = "BL1";
 
 	}
+	function getRandomInt (min, max) {
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
 	$scope.them = function(close)
 	{
+		 var Student = $resource('http://localhost:8080/admin/api/Student');
+         Student.query().$promise
+             .then(function(listStudent) {
+                
+                   var random = getRandomInt(1, 10000);
+		var mabienlai ="BL"+ "-" +random;
+		$scope.add_mabienlai = mabienlai;
+		console.log(mabienlai);
 		$http({
 				method : "POST",
 				url :"http://localhost:8080/admin/api/Student",
 				data :
 				{
 										studentId : $scope.add_studentId,
-				
+				mabienlai : $scope.add_mabienlai,
 											studentName : $scope.add_studentName,
 											ngaysinh : $scope.birthday,
 											gioitinh : $scope.gender,
@@ -64,39 +130,28 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 											tinhtrangsuckhoe : $scope.add_healthStatus,
 											iclass:$scope.add_className,
 											hotenph:$scope.parentName,
-											phone:$scope.add_phone
+											phone:$scope.add_phone,
+											tienphuthu : $scope.add_tienphuthu,
+											tienan : $scope.add_tienan,
+											tienhocphi : $scope.add_tienhocphi,
+											tongtien : parseInt($scope.add_tienhocphi)
+													+ parseInt($scope.add_tienan)
+													+ parseInt($scope.add_tienphuthu),
+											namhoc : $scope.add_namhoc,
+											tiendadong : $scope.add_tiendadong,
+											tienchuadong : $scope.add_tienchuadong
 				},
 				dataType : "json"
 				}).then( function (response) {
-					$scope.student_id= response.data.id;
-					console.log(response.data.id);
+					getAllTien();
+					addAlert();
+					if (close == true) {
+						$("#myModal_them").modal('hide');
+					}
 				});
 				
-		$http({
-						method : "POST",
-						url:"http://localhost:8080/admin/api/thutien",
-						data:
-						{
-							tienphuthu : $scope.add_tienphuthu,
-						
-							tienan : $scope.add_tienan,
-							tienhocphi : $scope.add_tienhocphi,
-							tongtien : parseInt($scope.add_tienhocphi)
-									+ parseInt($scope.add_tienan)
-									+ parseInt($scope.add_tienphuthu),
-							namhoc : $scope.add_namhoc,
-							tiendadong : $scope.add_tiendadong,
-							tienchuadong : $scope.add_tienchuadong,
-							hocsinh:
-							{
-								"id": $scope.student_id
-							}
-						},
-							dataType : "json"
-						}).then(function(result) {
-							
-						});
-					
+		
+	})
 	}
 
 	/*// add Student and học phí
@@ -180,19 +235,21 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 		});
 
 	}*/
-	var classID = ""
+	var studentID = "";
 		$scope.sua = function(data) {
 			$http
 					.get(
-							"http://localhost:8080/admin/api/thutien/"
+							"http://localhost:8080/admin/api/Student/"
 									+ data.id)
 					.then(
 							function(response) {
 
-							classID = data.id;
+								studentID = data.id;
+								$scope.edit_studentName = response.data.studentName;
+								
 								$scope.edit_maphieuthu = response.data.mabienlai;
-								$scope.edit_matre = response.data.hocsinh.studentId;
-								$scope.edit_studentName = response.data.hocsinh.studentName;
+								$scope.edit_matre = response.data.studentId;
+								
 								$scope.edit_tienhocphi = response.data.tienhocphi;
 								$scope.edit_tienan = response.data.tienan;
 								$scope.edit_phuthu = response.data.tienphuthu;
@@ -200,10 +257,8 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 								$scope.edit_tienchuadong = response.data.tienchuadong;
 								$scope.edit_id = data.id;
 								$scope.edit_namhoc = response.data.namhoc;
-								$scope.edit_stuid = response.data.hocsinh.id;
-								console.log(response.data);
+						$scope.class_id = response.data.iclass.id;
 								
-								console.log(response.data.tienchuadong);
 
 							});
 		}
@@ -211,10 +266,12 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 	$scope.update = function() {
 
 		var classObj = {
-			id : $scope.edit_id,
+				id : $scope.edit_id,
+				studentId : $scope.edit_matre,
+				studentName : $scope.edit_studentName,
 			mabienlai : $scope.edit_maphieuthu,
-			hocsinh : {
-				"id" : $scope.edit_stuid
+			iclass : {
+				"id":$scope.class_id
 			},
 			tienhocphi : $scope.edit_tienhocphi,
 			tienan : $scope.edit_tienan,
@@ -225,7 +282,7 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 
 		$http({
 			method : "PUT",
-			url : "http://localhost:8080/admin/api/thutien",
+			url : "http://localhost:8080/admin/api/Student",
 			data : classObj,
 			contentType : "application/json; charset=utf-8",
 			dataType : "json"
@@ -285,9 +342,7 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 			showConfirmButton : false
 		});
 	}
-	 function getRandomInt (min, max) {
-		    return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
+	 
 	//Hàm điền tự động
 	 $scope.autoAdd = function(keyEvent) {    		  
 	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {

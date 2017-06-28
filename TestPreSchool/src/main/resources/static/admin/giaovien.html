@@ -24,7 +24,12 @@
 				</div>
 
 				<div class="x_content">
-
+					<label for="mySelect">Hiển thị </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> dòng</label>
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -77,7 +82,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
+								<tr data-ng-show="showList(x,$index)" data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.teacherId"></td>
@@ -299,8 +304,8 @@
 							<div class="form-group">
 								<label class="control-label">Trạng thái</label>
 								<div class="" style="padding: 6px">
-									<input type="radio" ng-model="active" ng-value="true" /> Đang làm việc
-									 <input type="radio" ng-model="active" ng-value="false" />
+									<input type="radio" ng-model="active" ng-value="true" /> Đang
+									làm việc <input type="radio" ng-model="active" ng-value="false" />
 									Đã nghỉ
 								</div>
 							</div>

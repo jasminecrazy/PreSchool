@@ -25,7 +25,12 @@
 				</div>
 
 				<div class="x_content">
-
+					<label for="mySelect">Hiển thị </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> dòng</label>
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -72,12 +77,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
+								<tr data-ng-show="showList(x,$index)" data-ng-repeat="x in list |  orderBy:sortType:sortReverse">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.mabienlai"></td>
-									<td data-ng-bind="x.hocsinh.studentId"></td>
-									<td data-ng-bind="x.hocsinh.studentName"></td>
+									<td data-ng-bind="x.studentId"></td>
+									<td data-ng-bind="x.studentName"></td>
 
 									<td data-ng-bind="x.tienchuadong > 0 ? 'Còn nợ':'Đóng đủ'"></td>
 
@@ -89,12 +94,11 @@
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
 											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
+										</button> <!-- <button data-toggle="modal" class="btn btn-danger btn-sm"
 											data-tooltip="tooltip" title="Delete"
 											data-target="#myModal_xoa" ng-click="xoa(x)">
 											<span class="glyphicon glyphicon-remove"></span>
-										</button>
+										</button> -->
 									</td>
 								</tr>
 							</tbody>
@@ -330,7 +334,8 @@
 		</div>
 	</div>
 </div>
---> -->
+-->
+
 <!-- Modal thÃªm -->
 <div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
@@ -358,101 +363,100 @@
 							</div>
 						</div>
 						<div class="form-group">
-								<label class=" control-label" for="">Mã trẻ</label>
-								<div class="">
-									<input id="studentId" name="studentId"
-										ng-keyup="hideDuplicateAlert()" class="form-control input-md"
-										ng-keydown="autoAdd($event)" type="text"
-										ng-model="add_studentId" ng-required="false" />
-								</div>
+							<label class=" control-label" for="">Mã trẻ</label>
+							<div class="">
+								<input id="studentId" name="studentId"
+									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
+									ng-keydown="autoAdd($event)" type="text"
+									ng-model="add_studentId" ng-required="false" />
 							</div>
-							<input type="hidden" ng-model="student_id"/>
+						</div>
+						<input type="hidden" ng-model="student_id" />
 						<div class="form-group">
-								<label class=" control-label" for="">Họ và tên trẻ</label>
-								<div class="">
-									<input id="studentName" name="studentName"
-										class="form-control input-md" type="text"
-										ng-model="add_studentName" ng-required="false" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Ngày Sinh</label>
-								<div class="">
-									<input id="birthday" name="birthday" placeholder=""
-										ng-model="birthday" class="form-control input-md" type="date" />
-
-								</div>
-							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="control-label">Giới tính</label>
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="gender" value="0"
-										name="gender" ng-value="0" /> Nam
-									</label> <label> <input type="radio" ng-model="gender"
-										value="1" name="gender" ng-value="1" /> Nữ
-									</label>
-								</div>
-
-
-							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Địa chỉ</label>
-								<div class="">
-									<textarea id="address" name="address" rows="5"
-										class="form-control input-md" type="text"
-										ng-model="add_address"></textarea>
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Ngày vào
-									trường</label>
-								<div class="">
-									<input id="ngayvaotruong" name="ngayvaotruong" placeholder=""
-										class="form-control input-md" type="date" ng-required="true"
-										ng-model="add_ngayvaotruong" />
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">Tình trạng sức khỏe</label> <input
-									id="healthStatus" name="healthStatus" placeholder=""
+							<label class=" control-label" for="">Họ và tên trẻ</label>
+							<div class="">
+								<input id="studentName" name="studentName"
 									class="form-control input-md" type="text"
-									ng-model="add_healthStatus" />
-
+									ng-model="add_studentName" ng-required="false" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Ngày Sinh</label>
+							<div class="">
+								<input id="birthday" name="birthday" placeholder=""
+									ng-model="birthday" class="form-control input-md" type="date" />
 
 							</div>
-							<div class="form-group">
-								<label class="control-label">Họ tên phụ huynh</label> <input
-									id="parentName" name="parentName" placeholder=""
+						</div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="control-label">Giới tính</label>
+							<div class="checkbox">
+								<label> <input type="radio" ng-model="gender" value="0"
+									name="gender" ng-value="0" /> Nam
+								</label> <label> <input type="radio" ng-model="gender" value="1"
+									name="gender" ng-value="1" /> Nữ
+								</label>
+							</div>
+
+
+						</div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Địa chỉ</label>
+							<div class="">
+								<textarea id="address" name="address" rows="5"
 									class="form-control input-md" type="text"
-									ng-model="add_parentName" />
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label">Số điện thoại</label> <input
-									id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="add_phone" />
-
+									ng-model="add_address"></textarea>
 
 							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">Lớp</label>
-								<div class="">
-									<select ng-selected="student.class" ng-model="add_className"
-										class="form-control"
-										ng-options="x.tenlop for x in list_class" name="className"
-										id="className" ng-required="true">
-									</select>
-								</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Ngày vào
+								trường</label>
+							<div class="">
+								<input id="ngayvaotruong" name="ngayvaotruong" placeholder=""
+									class="form-control input-md" type="date" ng-required="true"
+									ng-model="add_ngayvaotruong" />
+
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Tình trạng sức khỏe</label> <input
+								id="healthStatus" name="healthStatus" placeholder=""
+								class="form-control input-md" type="text"
+								ng-model="add_healthStatus" />
 
-					
 
+						</div>
+						<div class="form-group">
+							<label class="control-label">Họ tên phụ huynh</label> <input
+								id="parentName" name="parentName" placeholder=""
+								class="form-control input-md" type="text"
+								ng-model="add_parentName" />
+
+
+						</div>
+
+
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Số điện thoại</label> <input
+								id="phone" name="phone" placeholder=""
+								class="form-control input-md" type="text" ng-model="add_phone" />
+
+
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="selectbasic">Lớp</label>
+							<div class="">
+								<select ng-selected="student.class" ng-model="add_className"
+									class="form-control" ng-options="x.tenlop for x in list_class"
+									name="className" id="className" ng-required="true">
+								</select>
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="control-label">Tiền phụ thu</label>
 							<div class="">
@@ -469,7 +473,7 @@
 							type="hidden" />
 
 
-					
+
 						<div class="form-group">
 							<label class="control-label">Năm học</label>
 							<div class="">
@@ -594,7 +598,7 @@
 
 
 						</div>
-
+						<input type="hidden" ng-model="class_id" />
 						<!-- Text input-->
 						<div class="form-group">
 							<label class="control-label" for="address">Tiền học phí</label>
@@ -666,19 +670,19 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">XÃ¡c nháº­n</h4>
+				<h4 class="modal-title" id="myModalLabel">Xác nhận</h4>
 			</div>
 
 			<div class="modal-body">
 
 				<input type="hidden" ng-model="teacher_delete.id" />
 
-				<p>Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a khÃ´ng?</p>
+				<p>Bạn có chắc chắn muốn xóa không?</p>
 			</div>
 
 			<div class="modal-footer">
-				<a class="btn btn-danger btn-ok" ng-click="deleteTeacher()">CÃ³</a>
-				<button type="button" class="btn btn-default" data-dismiss="modal">KhÃ´ng</button>
+				<a class="btn btn-danger btn-ok" ng-click="deleteTeacher()">Có</a>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
 
 			</div>
 		</div>

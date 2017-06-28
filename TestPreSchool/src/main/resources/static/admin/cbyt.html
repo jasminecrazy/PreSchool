@@ -16,6 +16,12 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
+				<label for="mySelect">Hiển thị </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> dòng</label>
 					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-6 pull-right">
@@ -85,7 +91,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr
+								<tr data-ng-show="showList(x,$index)"
 									data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter: filterTable">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
