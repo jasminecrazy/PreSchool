@@ -43,7 +43,7 @@ public class StudentControllerWS {
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
-	public ResponseEntity<Hocsinh> addStudent(@RequestBody Hocsinh student) {
+	public ResponseEntity<Integer> addStudent(@RequestBody Hocsinh student) {
 		try {
 			return new ResponseEntity<>(service.addStudent(student), HttpStatus.OK);
 			

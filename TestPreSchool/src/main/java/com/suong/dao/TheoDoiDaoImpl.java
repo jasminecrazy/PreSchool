@@ -51,7 +51,7 @@ private SessionFactory session;
 	@SuppressWarnings("unchecked")
 	public List<Nktheodoi> getStudentt() {
 		
-		 return session.getCurrentSession().createQuery("SELECT c.ngaytheodoi, c.hocsinh.studentId, c.hocsinh.studentName FROM Nktheodoi c GROUP BY c.ngaytheodoi").list();
+		 return session.getCurrentSession().createQuery("SELECT c.ngaytheodoi, c.hocsinh.studentId, c.hocsinh.studentName FROM Nktheodoi c GROUP BY c.hocsinh.id").list();
 		  
 	}
 
