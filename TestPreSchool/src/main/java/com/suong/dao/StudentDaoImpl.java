@@ -22,8 +22,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
 
 	@Override
-	public void addStudent(Hocsinh Student) {
-		session.getCurrentSession().save(Student);
+	public Hocsinh addStudent(Hocsinh student) {
+		return (Hocsinh) session.getCurrentSession().save(student);
 		
 	}
 
@@ -41,7 +41,7 @@ public class StudentDaoImpl implements StudentDao{
 	@SuppressWarnings("unchecked")
 	public List<Iclass> getAllClass() {
 		
-		return session.getCurrentSession().createQuery("from Iclass").list();
+		return session.getCurrentSession().createQuery("from Iclass t where t.quantity <=20").list();
 	}
 	@SuppressWarnings("unchecked")
 	public List<Hocsinh> getStudentByClassId(int classId) {

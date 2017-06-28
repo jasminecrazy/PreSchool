@@ -102,7 +102,7 @@ app
 												$scope.edit_degree = response.data.trinhdo;
 		
 												$scope.edit_chuyenmon = response.data.chuyenmon;
-												
+												$scope.active = response.data.status;
 												$scope.edit_address = response.data.address;
 												$scope.edit_phone = response.data.phone;
 												$scope.edit_id = data.id;
@@ -121,7 +121,8 @@ app
 								chuyenmon : $scope.edit_chuyenmon,
 								
 								address:$scope.edit_address,
-								phone:$scope.edit_phone
+								phone:$scope.edit_phone,
+								status: ($scope.active == null ? false : ($scope.active == false ? false : true))
 							}
 							$http({
 								method : "PUT",

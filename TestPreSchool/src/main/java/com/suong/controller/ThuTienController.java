@@ -73,5 +73,10 @@ public class ThuTienController {
 	public ResponseEntity<List<Hocsinh>> getAllStudents() {
 		return new ResponseEntity<>(thutienService.getAllStudents(), HttpStatus.OK);
 	}
+	@RequestMapping(value = "admin/api/student_thutien/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Thutienhoc>> getAllStu(@PathVariable int id) {
+		return new ResponseEntity<>(thutienService.getStuden(id), HttpStatus.OK);
+	}
+	
 
 }

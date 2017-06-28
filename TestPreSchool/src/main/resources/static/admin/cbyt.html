@@ -85,7 +85,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter: filterTable">
+								<tr
+									data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter: filterTable">
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.macbyt"></td>
@@ -101,12 +102,11 @@
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
 											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
+										</button> <!-- <button data-toggle="modal" class="btn btn-danger btn-sm"
 											data-tooltip="tooltip" title="Delete"
 											data-target="#myModal_xoa" ng-click="xoa(x)">
 											<span class="glyphicon glyphicon-remove"></span>
-										</button>
+										</button> -->
 									</td>
 								</tr>
 							</tbody>
@@ -298,6 +298,14 @@
 											class="form-control input-md" type="text" ng-required="true"
 											ng-model="edit_phone" />
 
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Trạng thái</label>
+									<div class="" style="padding: 6px">
+										<input type="radio" ng-model="active" ng-value="true" /> Đang làm việc
+										 <input type="radio" ng-model="active" ng-value="false" />
+										Đã nghỉ
 									</div>
 								</div>
 							</div>

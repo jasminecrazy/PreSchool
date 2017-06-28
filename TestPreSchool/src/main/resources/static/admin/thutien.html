@@ -8,6 +8,7 @@
 			<div class="form-group pull-right top_search">
 				<button data-toggle="modal" data-target="#myModal_them"
 					type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Thêm</button>
+
 			</div>
 		</div>
 	</div>
@@ -78,8 +79,7 @@
 									<td data-ng-bind="x.hocsinh.studentId"></td>
 									<td data-ng-bind="x.hocsinh.studentName"></td>
 
-									<td
-										data-ng-bind="x.tiendadong - x.tienchuadong > 0?'còn nợ': 'đóng đủ'"></td>
+									<td data-ng-bind="x.tienchuadong > 0 ? 'Còn nợ':'Đóng đủ'"></td>
 
 
 
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 </div>
-<!-- Modal thÃªm -->
+<!-- <!-- Modal thÃªm
 <div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -131,33 +131,25 @@
 			</div>
 			<div class="modal-body row">
 				<form class="form-horizontal" name="frmStudentAdd"
-					enctype="multipart/form-data" id="fileUploadForm">
+					id="fileUploadForm">
 					<div class="col-md-6">
-						<!-- Text input-->
-
-						<!-- Text input-->
+						Text input Text input
 						<div class="form-group">
-							
+
 							<div class="">
 								<input id="mabienlai" name="mabienlai"
 									class="form-control input-md" type="hidden"
 									ng-model="add_mabienlai" ng-required="false" />
 							</div>
 						</div>
-						<div class="form-group">
-							
-							<div class="">
-								<input id="mabienlai" name="mabienlai"
-									class="form-control input-md" type="hidden"
-									ng-model="add_matre" ng-required="false" />
-							</div>
-						</div>
+						<input type="hidden" ng-model="student_id" />
 						<div class="form-group">
 							<label class="control-label" for="selectbasic">Tên trẻ</label>
 							<div class="">
 								<input id="studentName" name="studentName"
 									class="form-control input-md" type="text"
-									ng-model="add_studentName" ng-required="false" />
+									ng-keydown="autoAdd($event)" ng-model="add_studentName"
+									ng-required="false" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -168,7 +160,7 @@
 
 							</div>
 						</div>
-						<!-- Text input-->
+						Text input
 						<div class="form-group">
 							<label class="control-label">Giới tính</label>
 							<div class="checkbox">
@@ -181,7 +173,7 @@
 
 
 						</div>
-						<!-- Text input-->
+						Text input
 						<div class="form-group">
 							<label class=" control-label" for="birthday">Địa chỉ</label>
 							<div class="">
@@ -201,6 +193,7 @@
 
 							</div>
 						</div>
+						<input type="hidden" ng-model="add_idclass" />
 						<div class="form-group">
 							<label class="control-label" for="selectbasic">Lớp</label>
 							<div class="">
@@ -226,6 +219,15 @@
 
 
 						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+
+							<div class="">
+								<input id="mabienlai" name="matre" class="form-control input-md"
+									type="hidden" ng-model="add_matre" ng-required="false" />
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="control-label">Số điện thoại</label> <input
 								id="phone" name="phone" placeholder=""
@@ -233,10 +235,7 @@
 
 
 						</div>
-					</div>
-					<div class="col-md-6">
-						
-						
+
 						<div class="form-group">
 							<label class="control-label">Tiền phụ thu</label>
 							<div class="">
@@ -247,18 +246,230 @@
 							</div>
 
 						</div>
+
+						<input id="tongtien" name="tongtien" placeholder=""
+							ng-model="add_tongtien" class="form-control input-md"
+							type="hidden" />
+
+
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label">Tổng tiền</label>
+							<label class="control-label">Năm học</label>
 							<div class="">
-								<input id="tongtien" name="tongtien" placeholder=""
-									ng-model="add_tongtien" class="form-control input-md"
+								<input id="namhoc" name="namhoc" placeholder=""
+									ng-model="add_namhoc" class="form-control input-md" type="text" />
+
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="control-label">Tiền đã đóng</label>
+							<div class="">
+								<input id="tiendadong" name="tiendadong" placeholder=""
+									ng-model="add_tiendadong" class="form-control input-md"
 									type="text" />
 
 							</div>
 
 						</div>
+						<div class="form-group">
+							<label class="control-label">Tiền chưa đóng</label>
+							<div class="">
+								<input id="tienchuadong" name="tienchuadong" placeholder=""
+									ng-model="add_tienchuadong" class="form-control input-md"
+									type="text" />
+
+							</div>
+
+						</div>
+						Text input
+						<div class="form-group">
+							<label class=" control-label" for="">Ngày thu</label>
+							<div class="">
+								<input id="ngaythu" name="ngaythu" class="form-control input-md"
+									type="date" ng-model="add_ngaythu" ng-required="false" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Tiền học phí</label>
+							<div class="">
+								<input id="tienhocphi" name="tienhocphi" placeholder=""
+									ng-model="add_tienhocphi" class="form-control input-md"
+									type="text" />
+
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="control-label">Tiền ăn</label>
+							<div class="">
+								<input id="tienan" name="tienan" placeholder=""
+									ng-model="add_tienan" class="form-control input-md" type="text" />
+
+							</div>
+
+						</div>
 					</div>
+
+
+
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button id="btnSave" name="btnSave" class="btn btn-primary"
+					ng-click="them(false)">Add</button>
+				<button id="btnSave" name="btnSave" class="btn btn-default"
+					ng-click="them(true)">Add and close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+--> -->
+<!-- Modal thÃªm -->
+<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Đóng học phí</h4>
+			</div>
+			<div class="modal-body row">
+				<form class="form-horizontal" name="frmStudentAdd"
+					id="fileUploadForm">
 					<div class="col-md-6">
+						<!-- Text input-->
+
+						<!-- Text input-->
+						<div class="form-group">
+
+							<div class="">
+								<input id="mabienlai" name="mabienlai"
+									class="form-control input-md" type="hidden"
+									ng-model="add_mabienlai" ng-required="false" />
+							</div>
+						</div>
+						<div class="form-group">
+								<label class=" control-label" for="">Mã trẻ</label>
+								<div class="">
+									<input id="studentId" name="studentId"
+										ng-keyup="hideDuplicateAlert()" class="form-control input-md"
+										ng-keydown="autoAdd($event)" type="text"
+										ng-model="add_studentId" ng-required="false" />
+								</div>
+							</div>
+							<input type="hidden" ng-model="student_id"/>
+						<div class="form-group">
+								<label class=" control-label" for="">Họ và tên trẻ</label>
+								<div class="">
+									<input id="studentName" name="studentName"
+										class="form-control input-md" type="text"
+										ng-model="add_studentName" ng-required="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Ngày Sinh</label>
+								<div class="">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="birthday" class="form-control input-md" type="date" />
+
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label">Giới tính</label>
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="gender" value="0"
+										name="gender" ng-value="0" /> Nam
+									</label> <label> <input type="radio" ng-model="gender"
+										value="1" name="gender" ng-value="1" /> Nữ
+									</label>
+								</div>
+
+
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Địa chỉ</label>
+								<div class="">
+									<textarea id="address" name="address" rows="5"
+										class="form-control input-md" type="text"
+										ng-model="add_address"></textarea>
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Ngày vào
+									trường</label>
+								<div class="">
+									<input id="ngayvaotruong" name="ngayvaotruong" placeholder=""
+										class="form-control input-md" type="date" ng-required="true"
+										ng-model="add_ngayvaotruong" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Tình trạng sức khỏe</label> <input
+									id="healthStatus" name="healthStatus" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="add_healthStatus" />
+
+
+							</div>
+							<div class="form-group">
+								<label class="control-label">Họ tên phụ huynh</label> <input
+									id="parentName" name="parentName" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="add_parentName" />
+
+
+							</div>
+							<div class="form-group">
+								<label class="control-label">Số điện thoại</label> <input
+									id="phone" name="phone" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="add_phone" />
+
+
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Lớp</label>
+								<div class="">
+									<select ng-selected="student.class" ng-model="add_className"
+										class="form-control"
+										ng-options="x.tenlop for x in list_class" name="className"
+										id="className" ng-required="true">
+									</select>
+								</div>
+							</div>
+
+					
+
+						<div class="form-group">
+							<label class="control-label">Tiền phụ thu</label>
+							<div class="">
+								<input id="tienphuthu" name="tienphuthu" placeholder=""
+									ng-model="add_tienphuthu" class="form-control input-md"
+									type="text" />
+
+							</div>
+
+						</div>
+
+						<input id="tongtien" name="tongtien" placeholder=""
+							ng-model="add_tongtien" class="form-control input-md"
+							type="hidden" />
+
+
+					
 						<div class="form-group">
 							<label class="control-label">Năm học</label>
 							<div class="">
@@ -352,8 +563,8 @@
 					<div class="col-md-6">
 						<!--- text input-->
 						<input type="hidden" name="id" ng-model="edit_id" /> <input
-							type="hidden" name="teacherId" ng-model="edit_teacherId" />
-
+							type="hidden" name="teacherId" ng-model="edit_teacherId" /> <input
+							type="hidden" ng-model="edit_stuid" />
 						<!-- Text input-->
 						<div class="form-group">
 							<label class="control-label" for="lastName">Mã phiếu thu</label>
@@ -408,7 +619,7 @@
 							<div class="">
 								<input type="number" id="tienphu" name="tienphu" min="0"
 									placeholder="" class="form-control input-md"
-									ng-model="edit_phu" />
+									ng-model="edit_phuthu" />
 
 							</div>
 						</div>
@@ -418,6 +629,15 @@
 								<input type="number" id="tiendadong" name="tiendadong" min="0"
 									placeholder="" class="form-control input-md"
 									ng-model="edit_tiendadong" />
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="address">Tiền chưa đóng</label>
+							<div class="">
+								<input type="number" id="tienchuadong" name="tienchuadong"
+									min="0" placeholder="" class="form-control input-md"
+									ng-model="edit_tienchuadong" />
 
 							</div>
 						</div>

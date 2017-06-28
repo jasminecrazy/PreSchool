@@ -72,6 +72,7 @@ app.controller('cbytCtrl', function($scope, $http) {
 					$scope.edit_phone = response.data.phone;
 					$scope.edit_id = data.id;
 					$scope.edit_maCbyt = data.macbyt;
+					$scope.active = response.data.status;
 				});
 
 	}
@@ -84,7 +85,8 @@ app.controller('cbytCtrl', function($scope, $http) {
 			trinhDo : $scope.edit_degree,
 			chuyenMon : $scope.edit_chuyenmon,
 			diaChi : $scope.edit_address,
-			phone : $scope.edit_phone
+			phone : $scope.edit_phone,
+			 status: ($scope.active == null ? false : ($scope.active == false ? false : true))
 		}
 		$http({
 			method : "PUT",

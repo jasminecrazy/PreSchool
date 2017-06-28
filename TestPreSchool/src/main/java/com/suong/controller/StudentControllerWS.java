@@ -43,21 +43,20 @@ public class StudentControllerWS {
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
-	public ResponseEntity<Void> addStudent(@RequestBody Hocsinh Student) {
+	public ResponseEntity<Hocsinh> addStudent(@RequestBody Hocsinh student) {
 		try {
-			service.addStudent(Student);
+			service.addStudent(student);
+			
 			/*Class1 class1 = classService.getIClass(Student.getClass1().getId());
 			class1.setQuantity(class1.getQuantity()+1);
 			System.out.println(class1.getQuantity());
 			classService.updateIClass(class1);*/
 			
-			
-			
-
+		
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(student,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.PUT)

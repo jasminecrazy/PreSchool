@@ -48,4 +48,10 @@ public class ThuTienServiceImpl implements ThuTienService{
 		return thutienDao.getAllStudents();
 	}
 
+	@Transactional
+	public List<Thutienhoc> getStuden(int id) {
+		// TODO Auto-generated method stub
+		return thutienDao.getStuden(id);
+	}
+
 }

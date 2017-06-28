@@ -146,6 +146,7 @@ app
 											$scope.edit_studentId=data.studentId;
 											$scope.edit_parentName = response.data.hotenph;
 											$scope.edit_phone = response.data.phone;
+											$scope.active = response.data.status;
 											for (var i = 0; i < $scope.list_class.length; i++) {
 								                if (response.data.iclass.malop == $scope.list_class[i].malop) {
 								                    $scope.edit_className = $scope.list_class[i];
@@ -168,8 +169,10 @@ app
 							tinhtrangsuckhoe:$scope.edit_healthStatus,
 							iclass : $scope.edit_className,
 							hotenph:$scope.edit_parentName,
-							phone:$scope.edit_phone
+							phone:$scope.edit_phone,
+							 status: ($scope.active == null ? false : ($scope.active == false ? false : true))
 						}
+						
 						$http({
 							method : "PUT",
 							url : "http://localhost:8080/admin/api/Student",

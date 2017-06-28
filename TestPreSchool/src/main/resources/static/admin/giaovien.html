@@ -96,12 +96,11 @@
 											data-tooltip="tooltip" title="Edit" data-toggle="modal"
 											data-target="#myModal_sua">
 											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-										<button data-toggle="modal" class="btn btn-danger btn-sm"
+										</button> <!-- 	<button data-toggle="modal" class="btn btn-danger btn-sm"
 											data-tooltip="tooltip" title="Delete"
 											data-target="#myModal_xoa" ng-click="xoa(x)">
 											<span class="glyphicon glyphicon-remove"></span>
-										</button>
+										</button> -->
 									</td>
 								</tr>
 							</tbody>
@@ -169,15 +168,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class=" control-label" for="selectbasic">Trình
-									độ</label>
+								<label class=" control-label" for="selectbasic">Trình độ</label>
 								<div class="">
 									<select class="form-control" name="degree" id="degree"
 										ng-model="add_degree" required="required">
-										<option value="College">Cao Đẳng</option>
-										<option value="University">Đại Học</option>
-										<option value="Master">Tiến sĩ</option>
-										<option value="Doctor">Thạc sĩ</option>
+										<option value="Cao Đẳng">Cao Đẳng</option>
+										<option value="Đại học">Đại Học</option>
+										<option value="Tiến sĩ">Cao học</option>
+										<option value="Thạc sĩ">Thạc sĩ</option>
 									</select>
 								</div>
 							</div>
@@ -193,7 +191,7 @@
 							</div>
 						</div>
 						<div class="form-group col-md-12">
-							
+
 							<div class="form-group">
 								<label class="control-label">Số điện thoại</label> <input
 									id="phone" name="phone" placeholder=""
@@ -279,10 +277,10 @@
 								<div class="">
 									<select id="degree" name="degree" class="form-control"
 										ng-model="edit_degree">
-										<option value="College">College</option>
-										<option value="University">University</option>
-										<option value="Master">Master</option>
-										<option value="Doctor">Doctor</option>
+										<option value="College">Cao Đẳng</option>
+										<option value="University">Đại học</option>
+										<option value="Master">Cao học</option>
+										<option value="Doctor">Thạc sĩ</option>
 									</select>
 								</div>
 							</div>
@@ -298,7 +296,15 @@
 
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label class="control-label">Trạng thái</label>
+								<div class="" style="padding: 6px">
+									<input type="radio" ng-model="active" ng-value="true" /> Đang làm việc
+									 <input type="radio" ng-model="active" ng-value="false" />
+									Đã nghỉ
+								</div>
+							</div>
+
 
 						</div>
 					</form>
@@ -400,7 +406,7 @@
 
 								</div>
 							</div>
-							
+
 						</div>
 
 

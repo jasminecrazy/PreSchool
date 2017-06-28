@@ -2,6 +2,7 @@ package com.suong.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,8 +50,9 @@ private SessionFactory session;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Nktheodoi> getStudentt() {
-		
-		return session.getCurrentSession().createQuery("from Nktheodoi n group by ngaytheodoi").list();
+		 String SQL_QUERY = "SELECT nktheodoi.ngaytheodoi FROM Nktheodoi nktheodoi GROUP BY nktheodoi.ngaytheodoi";
+		Query query =  (Query) session.getCurrentSession().createQuery(SQL_QUERY).list();
+		 return (List<Nktheodoi>) query;
 	}
 
 }

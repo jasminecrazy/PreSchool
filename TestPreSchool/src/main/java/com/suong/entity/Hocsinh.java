@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 26, 2017 10:12:42 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -48,10 +48,8 @@ public class Hocsinh implements java.io.Serializable {
 	public Hocsinh() {
 	}
 
-	public Hocsinh(Iclass iclass, String studentId, String studentName) {
+	public Hocsinh(Iclass iclass) {
 		this.iclass = iclass;
-		this.studentId = studentId;
-		this.studentName = studentName;
 	}
 
 	public Hocsinh(Iclass iclass, String studentId, String studentName, Date ngaysinh, byte gioitinh, String diachi,
@@ -95,7 +93,7 @@ public class Hocsinh implements java.io.Serializable {
 		this.iclass = iclass;
 	}
 
-	@Column(name = "student_id", nullable = false, length = 30)
+	@Column(name = "student_id", length = 30)
 	public String getStudentId() {
 		return this.studentId;
 	}
@@ -104,7 +102,7 @@ public class Hocsinh implements java.io.Serializable {
 		this.studentId = studentId;
 	}
 
-	@Column(name = "student_name", nullable = false, length = 50)
+	@Column(name = "student_name", length = 50)
 	public String getStudentName() {
 		return this.studentName;
 	}
@@ -204,7 +202,6 @@ public class Hocsinh implements java.io.Serializable {
 	public void setKhamsuckhoes(Set<Khamsuckhoe> khamsuckhoes) {
 		this.khamsuckhoes = khamsuckhoes;
 	}
-
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hocsinh")
 	public Set<Thutienhoc> getThutienhocs() {

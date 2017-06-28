@@ -50,6 +50,7 @@ app
 					}
 					getAllCBYT();
 					getAllTeacher();
+					
 					// Kiểm tra trùng ID
 					function id_duplicate_Add(id) {
 						var flag = true;
@@ -262,7 +263,44 @@ app
 
 						}
 					}
+					//get studentList for studen DETAIL
+					$scope.getStudent = function getStudent(id) {
+						$scope.array = [];
+						$scope.date = new Date();
 
+						$http(
+								{
+									method : "GET",
+									url : "http://localhost:8080/admin/api/class"
+											
+								})
+								.then(
+										function mySucess(response) {
+
+											$scope.ngaytheodoi = response.data.ngaytheodoi;
+											$scope.listStudent = response.data;
+											array = [];
+											for (var i = 0; i < $scope.listStudent.length; i++) {
+												array[i] = false;
+
+											}
+										});
+					}
+					/*$scope.getdetails = function () {
+
+						console.log($scope.ngaytheodoi);
+						if ($scope.userselected.ngaytheodoi == $scope.data.ngaytheodoi)
+
+						$scope.result = true;
+
+						else
+
+						$scope.result = false;
+
+						}*/
+
+						
+//get student list for liststudent
 					$scope.getStudents = function getStudent(id) {
 						$scope.array = [];
 						$scope.date = new Date();
@@ -283,6 +321,7 @@ app
 												array[i] = false;
 
 											}
+											console.log(id);
 										});
 					}
 					$scope.change = function(id) {
