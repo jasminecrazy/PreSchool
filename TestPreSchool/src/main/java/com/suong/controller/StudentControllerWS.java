@@ -45,7 +45,7 @@ public class StudentControllerWS {
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
 	public ResponseEntity<Hocsinh> addStudent(@RequestBody Hocsinh student) {
 		try {
-			service.addStudent(student);
+			return new ResponseEntity<>(service.addStudent(student), HttpStatus.OK);
 			
 			/*Class1 class1 = classService.getIClass(Student.getClass1().getId());
 			class1.setQuantity(class1.getQuantity()+1);
@@ -56,7 +56,7 @@ public class StudentControllerWS {
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
-		return new ResponseEntity<>(student,HttpStatus.CREATED);
+		
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.PUT)

@@ -22,10 +22,11 @@ public class StudentDaoImpl implements StudentDao{
 	}
 
 	@Override
-	public Hocsinh addStudent(Hocsinh student) {
-		return (Hocsinh) session.getCurrentSession().save(student);
-		
+	public Integer addStudent(Hocsinh student) {
+		session.getCurrentSession().save(student);
+		return student.getId();
 	}
+	
 
 	@Override
 	public void deleteStudent(int id) {

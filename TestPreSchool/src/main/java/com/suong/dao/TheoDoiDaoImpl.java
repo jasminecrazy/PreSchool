@@ -50,9 +50,9 @@ private SessionFactory session;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Nktheodoi> getStudentt() {
-		 String SQL_QUERY = "SELECT nktheodoi.ngaytheodoi FROM Nktheodoi nktheodoi GROUP BY nktheodoi.ngaytheodoi";
-		Query query =  (Query) session.getCurrentSession().createQuery(SQL_QUERY).list();
-		 return (List<Nktheodoi>) query;
+		
+		 return session.getCurrentSession().createQuery("SELECT c.ngaytheodoi, c.hocsinh.studentId, c.hocsinh.studentName FROM Nktheodoi c GROUP BY c.ngaytheodoi").list();
+		  
 	}
 
 }

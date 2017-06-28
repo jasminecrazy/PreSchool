@@ -9,7 +9,7 @@ public interface StudentService {
 
 	public Hocsinh getStudent(int id);
 
-	public Hocsinh addStudent(Hocsinh student);
+	public Integer addStudent(Hocsinh student);
 
 	public void deleteStudent(int id);
 

@@ -8,7 +8,7 @@ public interface StudentDao {
 
 	public Hocsinh getStudent(int id);
 
-	public Hocsinh addStudent(Hocsinh Student);
+	public Integer addStudent(Hocsinh Student);
 
 	public void deleteStudent(int id);
 

@@ -17,7 +17,7 @@ app
 					}
 					function getAllTheodoi() {
 						$scope.list_ngaytheodoi = [];
-						var Intake = $resource('http://localhost:8080/admin/api/follow');
+						var Intake = $resource('http://localhost:8080/admin/api/diemdanhhs');
 						Intake.query().$promise.then(function(listteacher) {
 
 							$scope.list_ngaytheodoi = listteacher;
@@ -286,10 +286,10 @@ app
 											}
 										});
 					}
-					/*$scope.getdetails = function () {
+					$scope.getdetails = function () {
 
-						console.log($scope.ngaytheodoi);
-						if ($scope.userselected.ngaytheodoi == $scope.data.ngaytheodoi)
+						console.log($scope.userselected.ngaytheodoi);
+						if ($scope.userselected.ngaytheodoi == $scope[0])
 
 						$scope.result = true;
 
@@ -297,7 +297,7 @@ app
 
 						$scope.result = false;
 
-						}*/
+					}
 
 						
 //get student list for liststudent

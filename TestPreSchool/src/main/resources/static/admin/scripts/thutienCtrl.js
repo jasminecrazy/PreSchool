@@ -69,6 +69,8 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 				dataType : "json"
 				}).then( function (response) {
 					$scope.student_id= response.data.id;
+					console.log("response.data.id");
+				});
 				
 		$http({
 						method : "POST",
@@ -94,7 +96,7 @@ app.controller('thutienCtrl', function($scope, $http, $resource) {
 						}).then(function(result) {
 							
 						});
-					});
+					
 	}
 
 	/*// add Student and học phí

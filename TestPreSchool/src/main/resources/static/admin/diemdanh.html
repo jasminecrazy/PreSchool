@@ -160,7 +160,7 @@
 					<h4 class="modal-title" id="myModalLabel">Danh sách trẻ</h4>
 					 <select ng-selected="ngaytheodoi"
 						ng-change="getdetails()" ng-model="userselected" class="col-md-4"
-						ng-options="x.ngaytheodoi for x in list_ngaytheodoi"
+						ng-options="x[0] for x in list_ngaytheodoi"
 						name="ngaytheodoi" id="ngaytheodoi" ng-required="true">
 						<option value="">--Chọn ngày cần xem--</option>
 					</select>

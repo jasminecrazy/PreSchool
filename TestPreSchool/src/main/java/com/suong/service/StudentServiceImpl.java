@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Transactional
-	public Hocsinh addStudent(Hocsinh student) {
+	public Integer addStudent(Hocsinh student) {
 		return studentDao.addStudent(student);
 		
 	}
