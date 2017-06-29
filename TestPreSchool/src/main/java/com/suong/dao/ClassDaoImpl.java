@@ -64,4 +64,11 @@ public class ClassDaoImpl implements ClassDao {
 				.setInteger("id", id).list();
 	}
 
+	@Override
+	public Long Count() {
+		
+		return (Long) sesion.getCurrentSession().createQuery("select count(p.id) from Iclass p").uniqueResult();
+	
+	}
+
 }

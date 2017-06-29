@@ -65,5 +65,9 @@ private CBYTService canboService;
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	@RequestMapping(value = "admin/api/countCbyt", method = RequestMethod.GET)
+	public ResponseEntity<Long> getAmountCBYT() {
+		return new ResponseEntity<>(canboService.Count(), HttpStatus.OK);
+	}
 	
 }

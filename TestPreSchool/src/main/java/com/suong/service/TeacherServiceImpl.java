@@ -41,4 +41,10 @@ private TeacherDao teacherDao;
 		
 	}
 
+	@Transactional
+	public Long Count() {
+		
+		return teacherDao.Count();
+	}
+
 }

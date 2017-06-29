@@ -13,9 +13,11 @@ public interface StudentDao {
 	public void deleteStudent(int id);
 
 	public void updateStudent(Hocsinh Student);
-	public List<Iclass>getAllClass();
-	public List<Hocsinh>getStudentByClassId(int classId);
 
+	public List<Iclass> getAllClass();
 
+	public List<Hocsinh> getStudentByClassId(int classId);
+
+	public Long Count();
 
 }

@@ -13,4 +13,5 @@ public interface TeacherDao {
 	public void deleteTeacher(int id);
 
 	public void updateTeacher(Giaovien giaovien);
+	public Long Count();
 }

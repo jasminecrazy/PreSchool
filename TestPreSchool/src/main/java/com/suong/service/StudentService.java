@@ -17,7 +17,7 @@ public interface StudentService {
 	public List<Iclass>getAllClass();
 
 	public List<Hocsinh>getStudentByClassId(int classId);
-	
+	public Long Count();
 
 
 }

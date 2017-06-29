@@ -80,4 +80,8 @@ public class ClassController {
 	public ResponseEntity<List<Hocsinh>> getIStudents(@PathVariable int id) {
 		return new ResponseEntity<>(classService.getIStudent(id), HttpStatus.OK);
 	}
+	@RequestMapping(value = "admin/api/countClass", method = RequestMethod.GET)
+	public ResponseEntity<Long> getAmountClass() {
+		return new ResponseEntity<>(classService.Count(), HttpStatus.OK);
+	}
 }

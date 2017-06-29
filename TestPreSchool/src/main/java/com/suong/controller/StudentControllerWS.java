@@ -98,5 +98,12 @@ public class StudentControllerWS {
 		return new ResponseEntity<>(list,HttpStatus.ACCEPTED);
 	
 	}
-
+	@RequestMapping(value = "admin/api/countStudent", method = RequestMethod.GET)
+	public ResponseEntity<Long> getAmountStudent() {
+		return new ResponseEntity<>(service.Count(), HttpStatus.OK);
+	}
+	/*@RequestMapping(value = "admin/api/totalmoney", method = RequestMethod.GET)
+	public ResponseEntity<Long> totalMoney() {
+		return new ResponseEntity<>(service.Count(), HttpStatus.OK);
+	}*/
 }

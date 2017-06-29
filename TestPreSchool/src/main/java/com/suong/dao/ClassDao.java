@@ -19,4 +19,5 @@ public interface ClassDao {
 	public List<Giaovien>getAllTeacher();
 	public List<Hocsinh>getStudent(int id);
 	public List<Hocsinh>getIStudent(int id);
+	public Long Count();
 }

@@ -45,7 +45,7 @@
 									<td>
 										<!--   <a class="btn btn-primary btn-sm" href="#/studentList/{{x.id}}" ng-click="getStudents(x.id)"><span class="glyphicon glyphicon-th-list"></span></a> -->
 										<button class="btn btn-primary btn-sm"
-											ng-click="getStudents(x.id)" data-tooltip="tooltip"
+											ng-click="getListStudent(x.id)" data-tooltip="tooltip"
 											title="Detail" data-toggle="modal"
 											data-target="#studentModal">
 											<span class="glyphicon glyphicon-list"></span>
@@ -95,9 +95,7 @@
 					<h4 class="modal-title" id="myModalLabel">List of students</h4>
 					<span ng-model="add_ngaytheodoi">Ngày {{date |
 						date:'dd-MM-yyyy'}}</span>
-					<button class="btn btn-primary btn-sm pull-right" ng-click="xemchitiet()"  data-toggle="modal"
-											data-target="#chitiet">Xem chi
-						tiết</button>
+					
 					<input id="timkiem" type="text" placeholder="Tìm kiếm"
 						class="form-control" data-ng-model="search"></input>
 				</div>
@@ -154,7 +152,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Phiáº¿u khÃ¡m sá»©c khá»�e</h4>
+					<h4 class="modal-title" id="myModalLabel">Phiếu khám sức khỏe</h4>
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal" name="frmHealthForm"
@@ -162,7 +160,7 @@
 						<div class="col-md-6">
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="">MÃ£ phiáº¿u khÃ¡m</label>
+								<label class=" control-label" for="">Mã phiếu khám</label>
 								<div class="">
 									<input id="sophieukham" name="sophieukham"
 										class="form-control input-md" type="text"
@@ -173,7 +171,7 @@
 							<input type="hidden" ng-model="add_id" />
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="">MÃ£ tráº»</label>
+								<label class=" control-label" for="">Mã trẻ</label>
 								<div class="">
 									<input id="studentId" name="studentId"
 										class="form-control input-md" type="text"
@@ -182,7 +180,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class=" control-label">TÃªn tráº»</label>
+								<label class=" control-label">Tên trẻ</label>
 								<div class="">
 									<input id="studentName" name="studentName"
 										ng-model="add_studentName" class="form-control input-md"
@@ -191,7 +189,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class=" control-label">Láº§n khÃ¡m</label>
+								<label class=" control-label">Lần khám</label>
 								<div class="">
 									<input id="lankham" name="lankham" ng-model="add_lankham"
 										class="form-control input-md" type="number" min="0" />
@@ -199,7 +197,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="selectbasic">NÄƒm há»�c </label>
+								<label class="control-label" for="selectbasic">Năm học </label>
 								<div class="">
 									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
 										class="form-control input-md" type="text" />
@@ -211,7 +209,7 @@
 						</div>
 						<div class="col-md-6">
 						<div class="form-group">
-								<label class="control-label" for="selectbasic">NgÃ y khÃ¡m</label>
+								<label class="control-label" for="selectbasic">Ngày khám</label>
 								<div class="">
 									<input id="ngaykham" name="ngaykham" ng-model="add_ngaykham"
 										class="form-control input-md" type="date" />
@@ -219,7 +217,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="selectbasic">Chiá»�u cao</label>
+								<label class="control-label" for="selectbasic">Chiều cao</label>
 								<div class="">
 									<input id="chieucao" name="chieucao" ng-model="add_chieucao"
 										class="form-control input-md" type="number" min="0" />
@@ -227,7 +225,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="selectbasic">CÃ¢n náº·ng</label>
+								<label class="control-label" for="selectbasic">Cân nặng</label>
 								<div class="">
 									<input id="cannang" name="cangnang" ng-model="add_cannang"
 										class="form-control input-md" type="number" min="0" />
@@ -235,8 +233,8 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="selectbasic">CÃ¡n bá»™ y
-									táº¿</label>
+								<label class="control-label" for="selectbasic">Cán bộ y tê
+									</label>
 								<div class="">
 									<select ng-selected="student.teacher" ng-model="add_cbytName"
 										class="form-control"
@@ -246,7 +244,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="selectbasic">Káº¿t luáº­n</label>
+								<label class="control-label" for="selectbasic">Kết luận</label>
 								<div class="">
 									<textarea id="ketluan" name="ketluan" ng-model="add_ketluan"
 										class="form-control" row="3" cols="3"></textarea>
@@ -259,9 +257,9 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="addHeath()">ThÃªm</button>
+						ng-click="addHeath()">Thêm</button>
 
-					<button type="button" class="btn btn-default" data-dismiss="modal">Ä�Ã³ng</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
 
 				</div>
 

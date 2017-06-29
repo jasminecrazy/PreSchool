@@ -14,4 +14,5 @@ public interface TeacherService {
 	public void deleteTeacher(int id);
 
 	public void updateTeacher(Giaovien giaovien);
+	public Long Count();
 }

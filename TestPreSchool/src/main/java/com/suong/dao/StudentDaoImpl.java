@@ -49,5 +49,11 @@ public class StudentDaoImpl implements StudentDao{
 		// TODO Auto-generated method stub
 		return session.getCurrentSession().createQuery("from Hocsinh t where t.iclass.id = :id").setInteger("id", classId).list();
 	}
+	@Override
+	public Long Count() {
+		// TODO Auto-generated method stub
+		return (Long) session.getCurrentSession().createQuery("select count(p.id) from Hocsinh p").uniqueResult();
+	}
+	
 	
 }

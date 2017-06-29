@@ -23,7 +23,7 @@ app.config(function($routeProvider, $locationProvider) {
 	}).when("/thutien", {
 		templateUrl : " thutien.html",
 		controller : "thutienCtrl"	
-	}).when("/phieusk", {
+	}).when("/phieukhamsk", {
 		templateUrl : " phieukhamsk.html",
 		controller : "phieukhamskCtrl"	
 	}).when("/diemdanh", {

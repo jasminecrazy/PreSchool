@@ -367,7 +367,31 @@ app
 												array[i] = false;
 
 											}
-											console.log(id);
+											console.log(response);
+										});
+					}
+					$scope.getListStudent = function (id)
+					{
+						$scope.array = [];
+						$scope.date = new Date();
+
+						$http(
+								{
+									method : "GET",
+									url : "http://localhost:8080/admin/api/class/get-students/"
+											+ id
+								})
+								.then(
+										function mySucess(response) {
+
+											$scope.ngaytheodoi = response.data.ngaytheodoi;
+											$scope.listStudent = response.data;
+											array = [];
+											for (var i = 0; i < $scope.listStudent.length; i++) {
+												array[i] = false;
+
+											}
+											
 										});
 					}
 					$scope.change = function(id) {
@@ -415,6 +439,7 @@ app
 									$scope.add_studentName = response.data[0]["hocsinh"].studentName;
 									$scope.add_id = response.data[0]["hocsinh"].id;
 								
+									console.log(response);
 						}, function(error) {
 							alert('fail');
 						});
@@ -422,8 +447,12 @@ app
 					}
 
 					
-
+					function getRandomInt (min, max) {
+					    return Math.floor(Math.random() * (max - min + 1)) + min;
+					}
 					$scope.addHeath = function() {
+						
+						
 						if (id_duplicate_Add(document
 								.getElementById("sophieukham").value)) {
 							$http(

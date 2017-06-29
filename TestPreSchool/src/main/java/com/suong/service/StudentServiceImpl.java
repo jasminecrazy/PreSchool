@@ -52,6 +52,14 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.getStudentByClassId(classId);
 	}
 
+	@Transactional
+	public Long Count() {
+		// TODO Auto-generated method stub
+		return studentDao.Count();
+	}
+
+	
+
 
 
 }

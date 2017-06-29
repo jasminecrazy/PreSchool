@@ -42,4 +42,10 @@ public class CBYTServiceImpl implements CBYTService{
 		
 	}
 
+	@Transactional
+	public Long Count() {
+		
+		return canboDao.Count();
+	}
+
 }

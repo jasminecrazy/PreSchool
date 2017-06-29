@@ -14,4 +14,5 @@ public interface CBYTDao {
 	public void deleteCbyt(int id);
 
 	public void updateCbyt(Cbyt canbo);
+	public Long Count();
 }

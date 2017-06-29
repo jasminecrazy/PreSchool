@@ -64,5 +64,8 @@ public class TeacherController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
+	@RequestMapping(value = "admin/api/countTeacher", method = RequestMethod.GET)
+	public ResponseEntity<Long> getAmountTeacher() {
+		return new ResponseEntity<>(teacherService.Count(), HttpStatus.OK);
+	}
 }

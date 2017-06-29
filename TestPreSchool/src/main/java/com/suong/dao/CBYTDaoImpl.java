@@ -41,6 +41,12 @@ session.getCurrentSession().save(canbo);
 		session.getCurrentSession().update(canbo);
 		
 	}
+
+	@Override
+	public Long Count() {
+		
+		return (Long) session.getCurrentSession().createQuery("select count(p.id) from Cbyt p").uniqueResult();
+	}
 	
 	
 	

@@ -39,4 +39,10 @@ public class TeacherDaoImpl implements TeacherDao{
 		
 	}
 
+	@Override
+	public Long Count() {
+		
+		return (Long) session.getCurrentSession().createQuery("select count(p.id) from Giaovien p").uniqueResult();
+	}
+
 }

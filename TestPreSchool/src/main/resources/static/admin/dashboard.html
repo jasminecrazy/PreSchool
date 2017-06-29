@@ -4,9 +4,9 @@
 					<ul class="breadcrumb">
 						<li>
 							<i class="ace-icon fa fa-home home-icon"></i>
-							<a href="#">Home</a>
+							<a href="#">Trang chủ</a>
 						</li>
-						<li class="active">Dashboard</li>
+						<li class="active">Bảng điều khiển</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -55,7 +55,7 @@
 									</div>
 
 									<div class="infobox-data">
-										<span class="infobox-data-number">5</span>
+										<span class="infobox-data-number">{{numberClass}}</span>
 										<div class="infobox-content">Tổng số lượng lớp học</div>
 									</div>
 								</div>
@@ -71,7 +71,7 @@
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat widget-header-small">
 											<h5 class="widget-title">
-												<i class="ace-icon fa fa-signal"></i>Thống kê học phí của học sinh
+												<i class="ace-icon fa fa-signal"></i>Thống kê
 											</h5>
 										</div>
 										<div class="widget-body">
@@ -86,7 +86,7 @@
 																<span class=" glyphicon glyphicon-ok"></span>
 																Tổng số học sinh mới
 															</span>
-														<h4 class="bigger pull-right">100</h4>
+														<h4 class="bigger pull-right">{{number}}</h4>
 													</div>
 
 													<div class="grid3">
@@ -116,9 +116,7 @@
 								<div class="col-sm-7">
 									<div class="widget-box transparent" id="recent-box">
 										<div class="widget-header">
-											<h4 class="widget-title lighter smaller">
-												<i class="ace-icon fa fa-rss orange"></i>RECENT
-											</h4>
+											
 
 											<div class="widget-toolbar no-border">
 												<ul class="nav nav-tabs" id="recent-tab">
@@ -126,9 +124,7 @@
 														<a data-toggle="tab" href="#task-tab">Danh sách lớp học</a>
 													</li>
 
-													<li>
-														<a data-toggle="tab" href="#member-tab">Danh sách học sinh chưa đóng học phí</a>
-													</li>
+					
 												</ul>
 											</div>
 										</div>
@@ -150,7 +146,7 @@
 																	<th class="center">Tên lớp</th>
 																	<th class="center">GVCN</th>
 																	<th class="center">Năm học</th>
-																	<th class="center">Sĩ số</th>
+																	<th class="center">Sỉ số</th>
 																	<td class="center"><a href="#"><span class="ui-icon ace-icon fa fa-plus center bigger-110 blue"></span></a></td>
 																</tr>
 															</thead>
@@ -177,8 +173,8 @@
 																		</label>
 																	</td>
 																	<td class="center">Mam01</td>
-																	<td class="center">Mầm</td>
-																	<td>Thu Sương</td>
+																	<td class="center">Máº§m</td>
+																	<td>Thu SÆ°Æ¡ng</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>
@@ -239,8 +235,8 @@
 																		</label>
 																	</td>
 																	<td class="center">Mam02</td>
-																	<td class="center">Mầm</td>
-																	<td>Thanh Phương</td>
+																	<td class="center">Máº§m</td>
+																	<td>Thanh PhÆ°Æ¡ng</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>
@@ -301,8 +297,8 @@
 																		</label>
 																	</td>
 																	<td class="center">Choi01</td>
-																	<td class="center">Mầm</td>
-																	<td>Phạm Sương</td>
+																	<td class="center">Máº§m</td>
+																	<td>Pháº¡m SÆ°Æ¡ng</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>
@@ -363,8 +359,8 @@
 																		</label>
 																	</td>
 																	<td class="center">La01</td>
-																	<td class="center">Mầm</td>
-																	<td>Thu Phương</td>
+																	<td class="center">Máº§m</td>
+																	<td>Thu PhÆ°Æ¡ng</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>
@@ -425,8 +421,8 @@
 																		</label>
 																	</td>
 																	<td class="center">La02</td>
-																	<td class="center">Lá</td>
-																	<td>Nguyễn Dương</td>
+																	<td class="center">LÃ¡</td>
+																	<td>Nguyá»…n DÆ°Æ¡ng</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>
@@ -494,11 +490,11 @@
 																			<span class="lbl"></span>
 																		</label>
 																	</th>
-																	<th class="center">Mã lớp</th>
-																	<th class="center">Tên lớp</th>
+																	<th class="center">MÃ£ lá»›p</th>
+																	<th class="center">TÃªn lá»›p</th>
 																	<th class="center">GVCN</th>
-																	<th class="center">Năm học</th>
-																	<th class="center">Sĩ số</th>
+																	<th class="center">NÄƒm há»�c</th>
+																	<th class="center">SÄ© sá»‘</th>
 																	<td class="center"><a href="#"><span class="ui-icon ace-icon fa fa-plus center bigger-110 blue"></span></a></td>
 																</tr>
 															</thead>
@@ -525,8 +521,8 @@
 																		</label>
 																	</td>
 																	<td class="center">La01</td>
-																	<td class="center">Lá</td>
-																	<td>Trần Thảo</td>
+																	<td class="center">LÃ¡</td>
+																	<td>Tráº§n Tháº£o</td>
 																	<td>2017</td>
 																	<td>20</td>
 																	<td>

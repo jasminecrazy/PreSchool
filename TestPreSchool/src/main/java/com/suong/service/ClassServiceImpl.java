@@ -59,4 +59,10 @@ public class ClassServiceImpl implements ClassService{
 		return classDao.getIStudent(id);
 	}
 
+	@Transactional
+	public Long Count() {
+		
+		return classDao.Count();
+	}
+
 }
