@@ -25,7 +25,12 @@
 				</div>
 
 				<div class="x_content">
-
+					<label for="mySelect">Hiển thị </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> dòng</label>
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -40,7 +45,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr data-ng-repeat="x in list">
+								<tr data-ng-show="showList(x,$index)" data-ng-repeat="x in list |  orderBy:sortType:sortReverse| filter : filterTable" >
 									<td ng-bind="$index+1"><input type="hidden"
 										ng-model="x.id" /></td>
 									<td data-ng-bind="x.malop"></td>
@@ -130,29 +135,29 @@
 
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="col-md-6">
-								<div class="form-group">
-									<label class=" control-label">Năm học</label>
-									<div class="">
-										<input id="namhoc" name="namhoc" ng-model="add_namhoc"
-											class="form-control input-md" type="text" />
+							<div class="form-group">
+								<label class=" control-label">Năm học</label>
+								<div class="">
+									<input id="namhoc" name="namhoc" ng-model="add_namhoc"
+										class="form-control input-md" type="text" />
 
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label" for="selectbasic">Giáo viên
-										chủ nhiệm</label>
-									<div class="">
-										<select ng-selected="student.teacher"
-											ng-model="add_teacherName" class="form-control"
-											ng-options="x.teacherName for x in list_teacher"
-											name="teacherName" id="teacherName" ng-required="true">
-										</select>
-									</div>
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="control-label" for="selectbasic">Giáo viên
+									chủ nhiệm</label>
+								<div class="">
+									<select ng-selected="student.teacher"
+										ng-model="add_teacherName" class="form-control"
+										ng-options="x.teacherName for x in list_teacher"
+										name="teacherName" id="teacherName" ng-required="true">
+									</select>
+								</div>
+							</div>
+						</div>
 
 
 					</form>
@@ -299,9 +304,9 @@
 					<h4 class="modal-title" id="myModalLabel">List of students</h4>
 					<span ng-model="add_ngaytheodoi">Ngày {{date |
 						date:'dd-MM-yyyy'}}</span>
-					<button class="btn btn-primary btn-sm pull-right" ng-click="xemchitiet()"  data-toggle="modal"
-											data-target="#chitiet">Xem chi
-						tiết</button>
+					<button class="btn btn-primary btn-sm pull-right"
+						ng-click="xemchitiet()" data-toggle="modal" data-target="#chitiet">Xem
+						chi tiết</button>
 					<input id="timkiem" type="text" placeholder="Tìm kiếm"
 						class="form-control" data-ng-model="search"></input>
 				</div>
@@ -420,7 +425,7 @@
 
 						</div>
 						<div class="col-md-6">
-						<div class="form-group">
+							<div class="form-group">
 								<label class="control-label" for="selectbasic">Ngày khám</label>
 								<div class="">
 									<input id="ngaykham" name="ngaykham" ng-model="add_ngaykham"
@@ -479,6 +484,6 @@
 		</div>
 	</div>
 	<!-- Modal xem chi tiết điểm danh -->
-	
+
 	<!--  -->
 </div>

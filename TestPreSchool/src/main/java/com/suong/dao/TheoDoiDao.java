@@ -18,5 +18,5 @@ public interface TheoDoiDao {
 
 	public List<Hocsinh> getAllStudent();
 
-	public List<Hocsinh> getStudentt();
+	public List<Nktheodoi> getStudentt();
 }

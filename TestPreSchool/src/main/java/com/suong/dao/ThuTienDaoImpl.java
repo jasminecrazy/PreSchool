@@ -48,4 +48,9 @@ public class ThuTienDaoImpl implements ThuTienDao {
 		return session.getCurrentSession().createQuery("from Hocsinh").list();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Thutienhoc> getStuden(int id) {
+		return session.getCurrentSession().createQuery("from Thutienhoc t where t.hocsinh.id = :id").setInteger("id", id).list();
+	}
+
 }

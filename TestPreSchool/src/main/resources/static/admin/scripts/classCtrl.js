@@ -17,7 +17,7 @@ app
 					}
 					function getAllTheodoi() {
 						$scope.list_ngaytheodoi = [];
-						var Intake = $resource('http://localhost:8080/admin/api/follow');
+						var Intake = $resource('http://localhost:8080/admin/api/diemdanhhs');
 						Intake.query().$promise.then(function(listteacher) {
 
 							$scope.list_ngaytheodoi = listteacher;
@@ -32,6 +32,52 @@ app
 
 					getAllTheodoi();
 					getAllClass();
+					$scope.rowdata = {
+						     availableOptions: [
+						    	 {id: '15', name: '15'},
+							       {id: '30', name: '30'},
+							       {id: '50', name: '50'},
+							       {id: '100', name: '100'}
+						     ],
+						     selectedOption: {id: '15', name: '15 rows'}
+						    };
+					$scope.ChangeRow=function(index){
+						$scope.itemsPerPage = index;
+						$scope.updatePageIndexes();
+					}
+					
+					// Phân trang
+			    	$scope.currentPage = 1;
+			    	// max size of the pagination bar
+			    	$scope.maxPaginationSize = 10;
+			    	  $scope.itemsPerPage = 15;
+			    	$scope.updatePageIndexes = function () {
+			    		var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+			    		if (totalPages <= 10) {
+			                // less than 10 total pages so show all
+			    			$scope.firstIndex = 1;
+			    			$scope.lastIndex = totalPages;
+			            } else {
+			                // more than 10 total pages so calculate start and end pages
+			                if ($scope.currentPage <= 6) {
+			                	$scope.firstIndex = 1;
+			                	$scope.lastIndex = 10;
+			                } else if ($scope.currentPage + 4 >= totalPages) {
+			                	$scope.firstIndex = totalPages - 9;
+			                	$scope.lastIndex = totalPages;
+			                } else {
+			                	$scope.firstIndex = $scope.currentPage - 5;
+			                	$scope.lastIndex = $scope.currentPage + 4;
+			                }
+			            }
+			    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+			    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+			    	};
+			    	$scope.updatePageIndexes();
+			    	
+			    	$scope.showList=function(school,index){
+			    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+			    	}
 					function getAllTeacher() {
 						$scope.list_teacher = [];
 						var Intake = $resource('http://localhost:8080/admin/api/classte');
@@ -50,6 +96,7 @@ app
 					}
 					getAllCBYT();
 					getAllTeacher();
+					
 					// Kiểm tra trùng ID
 					function id_duplicate_Add(id) {
 						var flag = true;
@@ -262,7 +309,44 @@ app
 
 						}
 					}
+					//get studentList for studen DETAIL
+					$scope.getStudent = function getStudent(id) {
+						$scope.array = [];
+						$scope.date = new Date();
 
+						$http(
+								{
+									method : "GET",
+									url : "http://localhost:8080/admin/api/class"
+											
+								})
+								.then(
+										function mySucess(response) {
+
+											$scope.ngaytheodoi = response.data.ngaytheodoi;
+											$scope.listStudent = response.data;
+											array = [];
+											for (var i = 0; i < $scope.listStudent.length; i++) {
+												array[i] = false;
+
+											}
+										});
+					}
+					$scope.getdetails = function () {
+
+						console.log($scope.userselected.ngaytheodoi);
+						if ($scope.userselected.ngaytheodoi == $scope[0])
+
+						$scope.result = true;
+
+						else
+
+						$scope.result = false;
+
+					}
+
+						
+//get student list for liststudent
 					$scope.getStudents = function getStudent(id) {
 						$scope.array = [];
 						$scope.date = new Date();
@@ -283,6 +367,7 @@ app
 												array[i] = false;
 
 											}
+											console.log(id);
 										});
 					}
 					$scope.change = function(id) {

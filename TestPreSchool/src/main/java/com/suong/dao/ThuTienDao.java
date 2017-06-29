@@ -16,4 +16,5 @@ public interface ThuTienDao {
 
 	public void updateTien(Thutienhoc tien);
 	public List<Hocsinh>getAllStudents();
+	public List<Thutienhoc>getStuden(int id);
 }

@@ -1,5 +1,5 @@
 package com.suong.entity;
-// Generated Jun 25, 2017 10:47:14 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Jun 28, 2017 11:53:33 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,10 +28,10 @@ public class Thutienhoc implements java.io.Serializable {
 	private Hocsinh hocsinh;
 	private String mabienlai;
 	private Date ngaythu;
-	private int tienhocphi;
-	private float tienan;
-	private float tienphuthu;
-	private float tongtien;
+	private Integer tienhocphi;
+	private Float tienan;
+	private Float tienphuthu;
+	private Float tongtien;
 	private String namhoc;
 	private Integer tiendadong;
 	private Integer tienchuadong;
@@ -39,20 +39,12 @@ public class Thutienhoc implements java.io.Serializable {
 	public Thutienhoc() {
 	}
 
-	public Thutienhoc(Hocsinh hocsinh, String mabienlai, Date ngaythu, int tienhocphi, float tienan, float tienphuthu,
-			float tongtien, String namhoc) {
+	public Thutienhoc(Hocsinh hocsinh) {
 		this.hocsinh = hocsinh;
-		this.mabienlai = mabienlai;
-		this.ngaythu = ngaythu;
-		this.tienhocphi = tienhocphi;
-		this.tienan = tienan;
-		this.tienphuthu = tienphuthu;
-		this.tongtien = tongtien;
-		this.namhoc = namhoc;
 	}
 
-	public Thutienhoc(Hocsinh hocsinh, String mabienlai, Date ngaythu, int tienhocphi, float tienan, float tienphuthu,
-			float tongtien, String namhoc, Integer tiendadong, Integer tienchuadong) {
+	public Thutienhoc(Hocsinh hocsinh, String mabienlai, Date ngaythu, Integer tienhocphi, Float tienan,
+			Float tienphuthu, Float tongtien, String namhoc, Integer tiendadong, Integer tienchuadong) {
 		this.hocsinh = hocsinh;
 		this.mabienlai = mabienlai;
 		this.ngaythu = ngaythu;
@@ -87,7 +79,7 @@ public class Thutienhoc implements java.io.Serializable {
 		this.hocsinh = hocsinh;
 	}
 
-	@Column(name = "mabienlai", nullable = false, length = 50)
+	@Column(name = "mabienlai", length = 50)
 	public String getMabienlai() {
 		return this.mabienlai;
 	}
@@ -97,7 +89,7 @@ public class Thutienhoc implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "ngaythu", nullable = false, length = 10)
+	@Column(name = "ngaythu", length = 10)
 	public Date getNgaythu() {
 		return this.ngaythu;
 	}
@@ -106,43 +98,43 @@ public class Thutienhoc implements java.io.Serializable {
 		this.ngaythu = ngaythu;
 	}
 
-	@Column(name = "tienhocphi", nullable = false)
-	public int getTienhocphi() {
+	@Column(name = "tienhocphi")
+	public Integer getTienhocphi() {
 		return this.tienhocphi;
 	}
 
-	public void setTienhocphi(int tienhocphi) {
+	public void setTienhocphi(Integer tienhocphi) {
 		this.tienhocphi = tienhocphi;
 	}
 
-	@Column(name = "tienan", nullable = false, precision = 12, scale = 0)
-	public float getTienan() {
+	@Column(name = "tienan", precision = 12, scale = 0)
+	public Float getTienan() {
 		return this.tienan;
 	}
 
-	public void setTienan(float tienan) {
+	public void setTienan(Float tienan) {
 		this.tienan = tienan;
 	}
 
-	@Column(name = "tienphuthu", nullable = false, precision = 12, scale = 0)
-	public float getTienphuthu() {
+	@Column(name = "tienphuthu", precision = 12, scale = 0)
+	public Float getTienphuthu() {
 		return this.tienphuthu;
 	}
 
-	public void setTienphuthu(float tienphuthu) {
+	public void setTienphuthu(Float tienphuthu) {
 		this.tienphuthu = tienphuthu;
 	}
 
-	@Column(name = "tongtien", nullable = false, precision = 12, scale = 0)
-	public float getTongtien() {
+	@Column(name = "tongtien", precision = 12, scale = 0)
+	public Float getTongtien() {
 		return this.tongtien;
 	}
 
-	public void setTongtien(float tongtien) {
+	public void setTongtien(Float tongtien) {
 		this.tongtien = tongtien;
 	}
 
-	@Column(name = "namhoc", nullable = false, length = 50)
+	@Column(name = "namhoc", length = 50)
 	public String getNamhoc() {
 		return this.namhoc;
 	}

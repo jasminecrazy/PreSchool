@@ -73,7 +73,7 @@ public class TheoDoiController {
 		return new ResponseEntity<>(theodoiService.getAllStudent(), HttpStatus.OK);
 	}
 	@RequestMapping(value = "admin/api/diemdanhhs", method = RequestMethod.GET)
-	public ResponseEntity<List<Hocsinh>> diemDanhHS() {
+	public ResponseEntity<List<Nktheodoi>> diemDanhHS() {
 		return new ResponseEntity<>(theodoiService.getStudentt(), HttpStatus.OK);
 	}
 	
